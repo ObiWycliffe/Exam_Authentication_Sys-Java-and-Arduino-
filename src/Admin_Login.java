@@ -77,9 +77,10 @@ PreparedStatement pst=null;
         jLabel3 = new javax.swing.JLabel();
         icon_label = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        click_here = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -139,6 +140,7 @@ PreparedStatement pst=null;
         });
 
         admin_login.setText("Log In");
+        admin_login.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         admin_login.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 admin_loginActionPerformed(evt);
@@ -157,6 +159,7 @@ PreparedStatement pst=null;
         passwordwarning.setForeground(new java.awt.Color(255, 0, 0));
 
         showpassword.setText("Show Password");
+        showpassword.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         showpassword.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 showpasswordActionPerformed(evt);
@@ -164,6 +167,7 @@ PreparedStatement pst=null;
         });
 
         admin_signup.setText("Sign Up");
+        admin_signup.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jLabel3.setFont(new java.awt.Font("Ebrima", 1, 8)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 102, 102));
@@ -171,16 +175,13 @@ PreparedStatement pst=null;
 
         icon_label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/UoE_Dark.png"))); // NOI18N
 
-        click_here.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
-        click_here.setForeground(new java.awt.Color(0, 153, 153));
-        click_here.setText("Here");
-        click_here.setBorder(null);
-        click_here.setName(""); // NOI18N
-        click_here.setPreferredSize(new java.awt.Dimension(57, 20));
-
         jLabel5.setText("to reset.");
 
         jLabel4.setText("Forgot password ?   Click");
+
+        jLabel6.setForeground(new java.awt.Color(0, 153, 153));
+        jLabel6.setText("Here");
+        jLabel6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -189,11 +190,11 @@ PreparedStatement pst=null;
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel4)
-                .addGap(3, 3, 3)
-                .addComponent(click_here, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(1, 1, 1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel5)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -201,10 +202,20 @@ PreparedStatement pst=null;
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(click_here, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel6))
                 .addContainerGap())
         );
+
+        jLabel7.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(102, 0, 0));
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel7.setText("X");
+        jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel7MousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -231,13 +242,17 @@ PreparedStatement pst=null;
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel3)
                 .addGap(71, 71, 71))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(icon_label, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(55, 55, 55)
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(icon_label, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(48, 48, 48)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(admin_username, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -259,7 +274,7 @@ PreparedStatement pst=null;
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(61, Short.MAX_VALUE))
+                .addContainerGap(58, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -278,7 +293,7 @@ PreparedStatement pst=null;
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        setSize(new java.awt.Dimension(370, 550));
+        setSize(new java.awt.Dimension(360, 550));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -291,15 +306,15 @@ PreparedStatement pst=null;
         
         //Check if fields are empty or not
         if(admin_username.getText().trim().isEmpty() && admin_password.getText().trim().isEmpty()){
-            usernamewarning.setText("Username is Empty");
-            passwordwarning.setText("Password is Empty");
+            usernamewarning.setText("Username is empty");
+            passwordwarning.setText("Password is empty");
         
         }
         else if(admin_username.getText().trim().isEmpty()){
-            usernamewarning.setText("Username is Empty");
+            usernamewarning.setText("Username is empty");
         }
         else if(admin_password.getText().trim().isEmpty()){
-            passwordwarning.setText("Password is Empty");
+            passwordwarning.setText("Password is empty");
         }
         else{
         
@@ -313,7 +328,7 @@ PreparedStatement pst=null;
         ///////////////////
         rs=pst.executeQuery();
         if(rs.next()){
-                JOptionPane.showMessageDialog(null, "Username and Password is Correct ");
+                JOptionPane.showMessageDialog(null, "Login Successfull");
                 
                 //conection with db for login is closed
                 rs.close();
@@ -324,10 +339,10 @@ PreparedStatement pst=null;
                 close();
                 //function closes login window before opening data window
                 
-                Student_Details s =new Student_Details();
+                Main_Activity_Frame s =new Main_Activity_Frame();
                 s.setVisible(true);
                 }else{
-                        JOptionPane.showMessageDialog(null, "Username and Password incorrect ");
+                        JOptionPane.showMessageDialog(null, "Username or Password incorrect ");
                         }
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, e);
@@ -350,15 +365,15 @@ PreparedStatement pst=null;
             
          //Check if fields are empty or not
         if(admin_username.getText().trim().isEmpty() && admin_password.getText().trim().isEmpty()){
-            usernamewarning.setText("Username is Empty");
-            passwordwarning.setText("Password is Empty");
+            usernamewarning.setText("Username is empty");
+            passwordwarning.setText("Password is empty");
         
         }
         else if(admin_username.getText().trim().isEmpty()){
-            usernamewarning.setText("Username is Empty");
+            usernamewarning.setText("Username is empty");
         }
         else if(admin_password.getText().trim().isEmpty()){
-            passwordwarning.setText("Password is Empty");
+            passwordwarning.setText("Password is empty");
         }
         else{
         
@@ -371,7 +386,7 @@ PreparedStatement pst=null;
         ///////////////////
         rs=pst.executeQuery();
         if(rs.next()){
-                JOptionPane.showMessageDialog(null, "Username and Password is Correct ");
+                JOptionPane.showMessageDialog(null, "Login Successfull");
                 
                 //conection with db for login is closed
                 rs.close();
@@ -382,10 +397,10 @@ PreparedStatement pst=null;
                 close();
                 //function closes login window before opening data window
                 
-                Student_Details s =new Student_Details();
+                Main_Activity_Frame s =new Main_Activity_Frame();
                 s.setVisible(true);
                 }else{
-                        JOptionPane.showMessageDialog(null, "Username and Password incorrect ");
+                        JOptionPane.showMessageDialog(null, "Username or Password incorrect ");
                         }
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, e);
@@ -453,6 +468,11 @@ PreparedStatement pst=null;
 
     }//GEN-LAST:event_admin_loginKeyReleased
 
+    private void jLabel7MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MousePressed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_jLabel7MousePressed
+
     /**
      * @param args the command line arguments
      */
@@ -494,13 +514,14 @@ PreparedStatement pst=null;
     private javax.swing.JPasswordField admin_password;
     private javax.swing.JButton admin_signup;
     private javax.swing.JTextField admin_username;
-    private javax.swing.JButton click_here;
     private javax.swing.JLabel icon_label;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
