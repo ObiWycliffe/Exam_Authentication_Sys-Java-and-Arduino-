@@ -326,19 +326,41 @@ PreparedStatement pst=null;
                 Admin_Id = rs.getInt("admin_id");
                 
                 if(!Account_Type.isEmpty() && !Account_Type.matches("block")){
-                JOptionPane.showMessageDialog(null, "Login Successfull");
+                    
+                    try{
+                    if(Account_Type.matches("Admin")){
+                        JOptionPane.showMessageDialog(null, "Login Successfull");
                 
-                //conection with db for login is closed
-                rs.close();
-                pst.close();
-                //conection with db for login is closed
+                        //conection with db for login is closed
+                        rs.close();
+                        pst.close();
+                        //conection with db for login is closed
                 
-                //function closes login window before opening data window
-                close();
-                //function closes login window before opening data window
+                        //function closes login window before opening data window
+                        close();
+                        //function closes login window before opening data window
                 
-                Main_Activity_Frame s =new Main_Activity_Frame();
-                s.setVisible(true);
+                        Main_Activity_Frame s =new Main_Activity_Frame();
+                        s.setVisible(true);
+                        }
+                    else{
+                        JOptionPane.showMessageDialog(null, "Login Successfull");
+                
+                        //conection with db for login is closed
+                        rs.close();
+                        pst.close();
+                        //conection with db for login is closed
+                
+                        //function closes login window before opening data window
+                        close();
+                        //function closes login window before opening data window
+                
+                        Main_Activity_Frame s =new Main_Activity_Frame();
+                        s.setVisible(true);
+                        Main_Activity_Frame.menu_panel_btn4.hide();
+                        }
+                    }catch(Exception e){}
+                    
                 }
                 else if(Account_Type.isEmpty() || Account_Type.matches(sql)){
                             JOptionPane.showMessageDialog(null, "NO PRIVILLAGE ASSIGNED!");
@@ -409,19 +431,41 @@ PreparedStatement pst=null;
                 Admin_Id = rs.getInt("admin_id");
                 
                 if(!Account_Type.isEmpty() && !Account_Type.matches("block")){
-                JOptionPane.showMessageDialog(null, "Login Successfull");
                 
-                //conection with db for login is closed
-                rs.close();
-                pst.close();
-                //conection with db for login is closed
+                    try{
+                    if(Account_Type.matches("Admin")){
+                        JOptionPane.showMessageDialog(null, "Login Successfull");
                 
-                //function closes login window before opening data window
-                close();
-                //function closes login window before opening data window
+                        //conection with db for login is closed
+                        rs.close();
+                        pst.close();
+                        //conection with db for login is closed
                 
-                Main_Activity_Frame s =new Main_Activity_Frame();
-                s.setVisible(true);
+                        //function closes login window before opening data window
+                        close();
+                        //function closes login window before opening data window
+                
+                        Main_Activity_Frame s =new Main_Activity_Frame();
+                        s.setVisible(true);
+                        }
+                    else{
+                        JOptionPane.showMessageDialog(null, "Login Successfull");
+                
+                        //conection with db for login is closed
+                        rs.close();
+                        pst.close();
+                        //conection with db for login is closed
+                
+                        //function closes login window before opening data window
+                        close();
+                        //function closes login window before opening data window
+                
+                        Main_Activity_Frame s =new Main_Activity_Frame();
+                        s.setVisible(true);
+                        Main_Activity_Frame.menu_panel_btn4.hide();
+                        }
+                    }catch(Exception e){}
+                    
                 }
                 else if(Account_Type.isEmpty() || Account_Type.matches(sql)){
                             JOptionPane.showMessageDialog(null, "NO PRIVILLAGE ASSIGNED!");

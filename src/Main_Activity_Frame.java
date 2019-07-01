@@ -3511,6 +3511,7 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
 
     private void menu_panel_btn4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu_panel_btn4MousePressed
         // menu btns press design:
+        
         ActivateButtonColor(menu_panel_btn4);
         ind_4.setOpaque(true);
         DeactivateButtonColor(new JPanel[]{menu_panel_btn5,menu_panel_btn1,menu_panel_btn3,menu_panel_btn2}, new JPanel[]{ind_7,ind_1,ind_3,ind_2});
@@ -4264,7 +4265,7 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
     private javax.swing.JPanel menu_panel_btn1;
     private javax.swing.JPanel menu_panel_btn2;
     private javax.swing.JPanel menu_panel_btn3;
-    private javax.swing.JPanel menu_panel_btn4;
+    public static javax.swing.JPanel menu_panel_btn4;
     private javax.swing.JPanel menu_panel_btn5;
     private javax.swing.JTextField min_fee_allowed;
     private javax.swing.JLabel pending_fee;
