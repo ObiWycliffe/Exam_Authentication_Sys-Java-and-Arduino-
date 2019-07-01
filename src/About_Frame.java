@@ -19,6 +19,7 @@ public class About_Frame extends javax.swing.JFrame {
     public About_Frame() {
         initComponents();
         
+        //Deactivates Window Maximize button
         setExtendedState(JFrame.MAXIMIZED_HORIZ);
         setVisible(true);
         setResizable(false);

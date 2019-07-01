@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import net.proteanit.sql.DbUtils;
 
 public class Admin_Login extends javax.swing.JFrame {
 Connection conn=null;
@@ -32,6 +33,7 @@ PreparedStatement pst=null;
         conn=javaconnect.ConnercrDb();
     
     }
+    
 
     //Function to resize image to Jlabel size
 
@@ -103,6 +105,9 @@ PreparedStatement pst=null;
             }
         });
         admin_username.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                admin_usernameKeyPressed(evt);
+            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 admin_usernameKeyReleased(evt);
             }
@@ -204,7 +209,7 @@ PreparedStatement pst=null;
         jLabel7.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(102, 0, 0));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setText("X");
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/close.png"))); // NOI18N
         jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jLabel7MousePressed(evt);
@@ -217,7 +222,7 @@ PreparedStatement pst=null;
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(icon_label, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(66, 66, 66)
+                .addGap(60, 60, 60)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(usernamewarning, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
@@ -231,19 +236,19 @@ PreparedStatement pst=null;
                     .addComponent(admin_username)
                     .addComponent(passwordwarning, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(57, Short.MAX_VALUE))
+                .addGap(61, 61, 61))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel3)
                 .addGap(71, 71, 71))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(icon_label, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(48, 48, 48)
@@ -268,16 +273,14 @@ PreparedStatement pst=null;
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(58, Short.MAX_VALUE))
+                .addContainerGap(55, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -308,8 +311,7 @@ PreparedStatement pst=null;
             passwordwarning.setText("Password is empty");
         }
         else{
-        
-        
+            
         String sql ="select * from admin_login where username=? and password=?";
         try{
         pst=conn.prepareStatement(sql);
@@ -319,6 +321,11 @@ PreparedStatement pst=null;
         ///////////////////
         rs=pst.executeQuery();
         if(rs.next()){
+                User = admin_username.getText();
+                Account_Type = rs.getString("account_type");
+                Admin_Id = rs.getInt("admin_id");
+                
+                if(!Account_Type.isEmpty() && !Account_Type.matches("block")){
                 JOptionPane.showMessageDialog(null, "Login Successfull");
                 
                 //conection with db for login is closed
@@ -332,6 +339,15 @@ PreparedStatement pst=null;
                 
                 Main_Activity_Frame s =new Main_Activity_Frame();
                 s.setVisible(true);
+                }
+                else if(Account_Type.isEmpty() || Account_Type.matches(sql)){
+                            JOptionPane.showMessageDialog(null, "NO PRIVILLAGE ASSIGNED!");
+                        }
+                else{
+                        JOptionPane.showMessageDialog(null, "ACCOUNT IS BLOCKED!");
+                        System.exit(0);
+                    }
+                
                 }else{
                         JOptionPane.showMessageDialog(null, "Username or Password incorrect ");
                         }
@@ -349,8 +365,18 @@ PreparedStatement pst=null;
     }//GEN-LAST:event_admin_loginActionPerformed
 
     private void admin_passwordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_admin_passwordKeyPressed
+        // CUT
+    }//GEN-LAST:event_admin_passwordKeyPressed
+
+    private void jPanel1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel1KeyReleased
         // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel1KeyReleased
+
+    private void admin_passwordKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_admin_passwordKeyReleased
+        // TODO add your handling code here:
+        passwordwarning.setText("");
         
+        //Key Listener Function to Check if field is empty
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             
             
@@ -367,7 +393,7 @@ PreparedStatement pst=null;
             passwordwarning.setText("Password is empty");
         }
         else{
-        
+            
         String sql ="select * from admin_login where username=? and password=?";
         try{
         pst=conn.prepareStatement(sql);
@@ -376,7 +402,13 @@ PreparedStatement pst=null;
         ////////////////////////////////////////////////
         ///////////////////
         rs=pst.executeQuery();
+         
         if(rs.next()){
+                User = admin_username.getText();
+                Account_Type = rs.getString("account_type");
+                Admin_Id = rs.getInt("admin_id");
+                
+                if(!Account_Type.isEmpty() && !Account_Type.matches("block")){
                 JOptionPane.showMessageDialog(null, "Login Successfull");
                 
                 //conection with db for login is closed
@@ -390,6 +422,15 @@ PreparedStatement pst=null;
                 
                 Main_Activity_Frame s =new Main_Activity_Frame();
                 s.setVisible(true);
+                }
+                else if(Account_Type.isEmpty() || Account_Type.matches(sql)){
+                            JOptionPane.showMessageDialog(null, "NO PRIVILLAGE ASSIGNED!");
+                        }
+                else{
+                        JOptionPane.showMessageDialog(null, "ACCOUNT IS BLOCKED!");
+                        System.exit(0);
+                        }
+                
                 }else{
                         JOptionPane.showMessageDialog(null, "Username or Password incorrect ");
                         }
@@ -403,23 +444,152 @@ PreparedStatement pst=null;
             }
             catch(Exception e){}
             }
-        
-            }
+          }
         }
-    }//GEN-LAST:event_admin_passwordKeyPressed
-
-    private void jPanel1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel1KeyReleased
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jPanel1KeyReleased
-
-    private void admin_passwordKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_admin_passwordKeyReleased
-        // TODO add your handling code here:
-        passwordwarning.setText("");
     }//GEN-LAST:event_admin_passwordKeyReleased
 
     private void admin_usernameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_admin_usernameKeyReleased
         // TODO add your handling code here:
         usernamewarning.setText("");
+        
+        //Key Listener Function to Check if field is empty
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            
+            
+         //Check if fields are empty or not
+        if(admin_username.getText().trim().isEmpty() && admin_password.getText().trim().isEmpty()){
+            usernamewarning.setText("Username is empty");
+            passwordwarning.setText("Password is empty");
+        
+        }
+        else if(admin_username.getText().trim().isEmpty()){
+            usernamewarning.setText("Username is empty");
+        }
+        else if(admin_password.getText().trim().isEmpty()){
+            passwordwarning.setText("Password is empty");
+        }
+        else{
+            
+        String sql ="select * from admin_login where username=? and password=?";
+        try{
+        pst=conn.prepareStatement(sql);
+        pst.setString(1,admin_username.getText());
+        pst.setString(2,admin_password.getText());
+        ////////////////////////////////////////////////
+        ///////////////////
+        rs=pst.executeQuery();
+         
+        if(rs.next()){
+                User = admin_username.getText();
+                Account_Type = rs.getString("account_type");
+                Admin_Id = rs.getInt("admin_id");
+                
+                if(!Account_Type.isEmpty() && !Account_Type.matches("block")){
+                JOptionPane.showMessageDialog(null, "Login Successfull");
+                
+                //conection with db for login is closed
+                rs.close();
+                pst.close();
+                //conection with db for login is closed
+                
+                //function closes login window before opening data window
+                close();
+                //function closes login window before opening data window
+                
+                Main_Activity_Frame s =new Main_Activity_Frame();
+                s.setVisible(true);
+                }
+                else if(Account_Type.isEmpty() || Account_Type.matches(sql)){
+                            JOptionPane.showMessageDialog(null, "NO PRIVILLAGE ASSIGNED!");
+                        }
+                else{
+                        JOptionPane.showMessageDialog(null, "ACCOUNT IS BLOCKED!");
+                        System.exit(0);
+                        }
+                
+                }else{
+                        JOptionPane.showMessageDialog(null, "Username or Password incorrect ");
+                        }
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+            }   finally {
+      
+            try{
+            rs.close();
+            pst.close();
+            }
+            catch(Exception e){}
+            }
+          }
+        }if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            
+            
+         //Check if fields are empty or not
+        if(admin_username.getText().trim().isEmpty() && admin_password.getText().trim().isEmpty()){
+            usernamewarning.setText("Username is empty");
+            passwordwarning.setText("Password is empty");
+        
+        }
+        else if(admin_username.getText().trim().isEmpty()){
+            usernamewarning.setText("Username is empty");
+        }
+        else if(admin_password.getText().trim().isEmpty()){
+            passwordwarning.setText("Password is empty");
+        }
+        else{
+            
+        String sql ="select * from admin_login where username=? and password=?";
+        try{
+        pst=conn.prepareStatement(sql);
+        pst.setString(1,admin_username.getText());
+        pst.setString(2,admin_password.getText());
+        ////////////////////////////////////////////////
+        ///////////////////
+        rs=pst.executeQuery();
+         
+        if(rs.next()){
+                User = admin_username.getText();
+                Account_Type = rs.getString("account_type");
+                Admin_Id = rs.getInt("admin_id");
+                
+                if(!Account_Type.isEmpty() && !Account_Type.matches("block")){
+                JOptionPane.showMessageDialog(null, "Login Successfull");
+                
+                //conection with db for login is closed
+                rs.close();
+                pst.close();
+                //conection with db for login is closed
+                
+                //function closes login window before opening data window
+                close();
+                //function closes login window before opening data window
+                
+                Main_Activity_Frame s =new Main_Activity_Frame();
+                s.setVisible(true);
+                }
+                else if(Account_Type.isEmpty() || Account_Type.matches(sql)){
+                            JOptionPane.showMessageDialog(null, "NO PRIVILLAGE ASSIGNED!");
+                        }
+                else{
+                        JOptionPane.showMessageDialog(null, "ACCOUNT IS BLOCKED!");
+                        System.exit(0);
+                        }
+                
+                }else{
+                        JOptionPane.showMessageDialog(null, "Username or Password incorrect ");
+                        }
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+            }   finally {
+      
+            try{
+            rs.close();
+            pst.close();
+            }
+            catch(Exception e){}
+            }
+          }
+        }
     }//GEN-LAST:event_admin_usernameKeyReleased
 
     private void showpasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showpasswordActionPerformed
@@ -471,6 +641,10 @@ PreparedStatement pst=null;
         signup.setVisible(true);
         
     }//GEN-LAST:event_admin_signupActionPerformed
+
+    private void admin_usernameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_admin_usernameKeyPressed
+        //CUT  
+    }//GEN-LAST:event_admin_usernameKeyPressed
 
     /**
      * @param args the command line arguments
@@ -527,4 +701,8 @@ PreparedStatement pst=null;
     private javax.swing.JCheckBox showpassword;
     private javax.swing.JLabel usernamewarning;
     // End of variables declaration//GEN-END:variables
+
+    public static String User, Account_Type;
+    public static int Admin_Id;
+
 }
