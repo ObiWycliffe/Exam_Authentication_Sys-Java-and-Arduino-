@@ -304,13 +304,15 @@ PreparedStatement pst=null;
                 User = admin_username.getText();
                 Account_Type = rs.getString("account_type");
                 Admin_Id = rs.getInt("admin_id");
+                String userAccount = rs.getString("account_type");
+                String userName = rs.getString("username");
                 
                 if(!Account_Type.isEmpty() && !Account_Type.matches("block")){
                     
                     try{
                     if(Account_Type.matches("Admin")){
                         JOptionPane.showMessageDialog(null, "Login Successfull");
-                
+                        
                         //conection with db for login is closed
                         rs.close();
                         pst.close();
@@ -344,6 +346,26 @@ PreparedStatement pst=null;
                         
                         //FunctionControl.LoadDash();
                         }
+                    
+                        //Functions To set anchor label of account user type
+                        try{
+                            Main_Activity_Frame.account_label.setText(userAccount);
+                            
+                             //if(userAccount.matches("Admin")){
+                             //Main_Activity_Frame.account_label.setText("Admin");
+                             //}else{
+                             //Main_Activity_Frame.account_label.setText("Support Staff");}
+                             
+                             }catch(Exception e){
+                                 JOptionPane.showMessageDialog(null, e);
+                             }
+                        try{
+                             Main_Activity_Frame.user_label.setText(userName);
+
+                             }catch(Exception e){
+                                 JOptionPane.showMessageDialog(null, e);}
+                        //Functions To set anchor label of account user type end
+                        
                     }catch(Exception e){}
                     
                 }

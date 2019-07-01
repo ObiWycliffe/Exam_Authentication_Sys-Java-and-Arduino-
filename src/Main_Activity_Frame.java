@@ -234,6 +234,11 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
         menu_panel_btn5 = new javax.swing.JPanel();
         ind_7 = new javax.swing.JPanel();
         menu_label_btn5 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        user_label = new javax.swing.JLabel();
+        account_label = new javax.swing.JLabel();
+        jLabel36 = new javax.swing.JLabel();
+        jLabel47 = new javax.swing.JLabel();
         searchStudent_panel = new javax.swing.JPanel();
         jToolBar1 = new javax.swing.JToolBar();
         student_search = new javax.swing.JTextField();
@@ -683,6 +688,53 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jPanel1.setBackground(new java.awt.Color(0, 0, 51));
+
+        user_label.setFont(new java.awt.Font("Franklin Gothic Book", 0, 15)); // NOI18N
+        user_label.setForeground(new java.awt.Color(255, 255, 255));
+        user_label.setText("uss");
+
+        account_label.setFont(new java.awt.Font("Dialog", 0, 8)); // NOI18N
+        account_label.setForeground(new java.awt.Color(255, 255, 255));
+        account_label.setText("acc");
+
+        jLabel36.setFont(new java.awt.Font("Franklin Gothic Medium", 1, 12)); // NOI18N
+        jLabel36.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel36.setText("USER");
+
+        jLabel47.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel47.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel47.setText("||");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(2, 2, 2)
+                .addComponent(jLabel36)
+                .addGap(4, 4, 4)
+                .addComponent(jLabel47)
+                .addGap(2, 2, 2)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(user_label, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(account_label, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(2, 2, 2))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(2, 2, 2)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(user_label)
+                        .addComponent(jLabel36))
+                    .addComponent(jLabel47))
+                .addGap(0, 0, 0)
+                .addComponent(account_label)
+                .addGap(2, 2, 2))
+        );
+
         javax.swing.GroupLayout Menu_PanelLayout = new javax.swing.GroupLayout(Menu_Panel);
         Menu_Panel.setLayout(Menu_PanelLayout);
         Menu_PanelLayout.setHorizontalGroup(
@@ -692,11 +744,17 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
             .addComponent(menu_panel_btn3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(menu_panel_btn5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(menu_panel_btn1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(Menu_PanelLayout.createSequentialGroup()
+                .addGap(49, 49, 49)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         Menu_PanelLayout.setVerticalGroup(
             Menu_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Menu_PanelLayout.createSequentialGroup()
-                .addGap(184, 184, 184)
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(144, 144, 144)
                 .addComponent(menu_panel_btn1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(menu_panel_btn2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -4053,6 +4111,7 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
     public static javax.swing.JPanel System_Edit_Dashboard;
     private javax.swing.JButton account_block;
     private javax.swing.JButton account_delete;
+    public static javax.swing.JLabel account_label;
     private javax.swing.JComboBox<String> account_privallage;
     private javax.swing.JButton account_unblock;
     private javax.swing.JCheckBox admin_gender_female;
@@ -4129,6 +4188,7 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
+    private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel39;
@@ -4140,6 +4200,7 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel44;
     private javax.swing.JLabel jLabel45;
     private javax.swing.JLabel jLabel46;
+    private javax.swing.JLabel jLabel47;
     private javax.swing.JLabel jLabel48;
     private javax.swing.JLabel jLabel49;
     private javax.swing.JLabel jLabel5;
@@ -4158,6 +4219,7 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
@@ -4230,6 +4292,7 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
     private javax.swing.JLabel uoe_admin_pic;
     private javax.swing.JLabel uoe_header_logo;
     private javax.swing.JLabel uoe_students_pic;
+    public static javax.swing.JLabel user_label;
     private javax.swing.JLabel zero_fee;
     // End of variables declaration//GEN-END:variables
 

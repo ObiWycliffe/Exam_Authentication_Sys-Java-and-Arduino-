@@ -7,6 +7,10 @@ import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import static java.lang.Thread.sleep;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.logging.Level;
@@ -33,6 +37,12 @@ import org.jfree.data.jdbc.JDBCCategoryDataset;
  */
 public class FunctionControl {
     
+    Connection conn=null;
+    ResultSet rs =null;
+    PreparedStatement pst=null;
+    
+    
+    
     
     //Function to load Line graph on start of application
     public static void Autofill(){
@@ -55,6 +65,12 @@ public class FunctionControl {
             JOptionPane.showMessageDialog(null, e);
             }
      }
+    
+    
+    
+    public static void setLabel(){
+      
+    }
     
     
     //Function to load Dashboard panel
