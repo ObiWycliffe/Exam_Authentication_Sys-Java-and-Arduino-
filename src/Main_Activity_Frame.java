@@ -17,8 +17,6 @@ import java.io.ByteArrayOutputStream;
 import java.sql.*;
 import javax.swing.*;
 import net.proteanit.sql.DbUtils;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.text.*;
 import java.io.File;
 import java.io.FileInputStream;
@@ -48,8 +46,6 @@ import org.jfree.chart.renderer.category.BarRenderer;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.jdbc.JDBCCategoryDataset;
-import org.jfree.data.xy.XYDataset;
-import org.jfree.data.xy.XYZDataset;
 
 public class Main_Activity_Frame extends javax.swing.JFrame {
     Connection conn=null;
@@ -65,7 +61,7 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
         conn=javaconnect.ConnercrDb();
         Update_table();
         Fillcombo();
-        CurrentDate();
+        FunctionControl.CurrentDate();
         student_search.setFocusable(rootPaneCheckingEnabled);
         
         
@@ -79,61 +75,10 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
 
         }
     
-    
-    public void CurrentDate(){
-    
-    Thread clock = new Thread(){
-        public void run(){
-            for(;;){
-                
-                Calendar cal = new GregorianCalendar();
-                int day =cal.get(Calendar.DAY_OF_MONTH);
-                int month =cal.get(Calendar.MONTH);
-                int year =cal.get(Calendar.YEAR);
-                date.setText("Date: "+day+" / "+(month+1)+"  ["+year+"]");
-    
-//    int second = cal.get(Calendar.SECOND);
-//    int minute = cal.get(Calendar.MINUTE);
-//    int hour = cal.get(Calendar.HOUR);
-//    txt_time.setText("Time "+hour+":"+(minute)+":"+second);
-                   
-                try {
-                    sleep(1000);
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(Main_Activity_Frame.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                
-              }
-            }
-    
-    
-        };
-    clock.start();
-    
-    }
-    
     public void close(){
     WindowEvent winClosingEvent = new WindowEvent(this,WindowEvent.WINDOW_CLOSING);
     Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);
     }
-    
-     //Function to resize image to Jlabel size
-
-    private BufferedImage scaleimage(BufferedImage img, int w, int h, int type){
-        BufferedImage resizedImage = new BufferedImage(w, h, type);
-        Graphics2D g = resizedImage.createGraphics();
-        g.drawImage(img, 0, 0, w, h, null);
-        g.dispose();
-        g.setComposite(AlphaComposite.Src);
-        
-        g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-        g.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-    
-        return resizedImage;
-    }
-    //Function to resize image to Jlabel size end
-    
     
   private void Update_table(){
       
@@ -244,11 +189,8 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
         }catch(Exception e){
             JOptionPane.showMessageDialog(rootPane, e);
             }
-      
       return resizedImage;
-  
         }
-  
   
   private void Fillcombo(){
      /** try{
@@ -259,8 +201,6 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
           while(rs.next()){
               String first_name =rs.getString("first_name");
               school.addItem(first_name);
-          
-          
             }
           
         }catch(Exception e){
@@ -490,7 +430,6 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
         setTitle("University of Eldoret Academic Registration System - U.o.E");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setFocusCycleRoot(false);
-        setPreferredSize(new java.awt.Dimension(1300, 600));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {
                 formWindowActivated(evt);
@@ -1703,9 +1642,7 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
                         .addComponent(studentTables_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())
                     .addComponent(IsoCertified_Label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, All_Student_Edit_PanelLayout.createSequentialGroup()
-                        .addGap(0, 0, 0)
-                        .addComponent(Header_Panel, javax.swing.GroupLayout.PREFERRED_SIZE, 843, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(Header_Panel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 843, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
         All_Student_Edit_PanelLayout.setVerticalGroup(
             All_Student_Edit_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1896,7 +1833,7 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
                 .addComponent(privillage_update)
                 .addGap(25, 25, 25)
                 .addComponent(account_delete)
-                .addContainerGap(55, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jLabel29.setText("Mobile");
@@ -1938,6 +1875,11 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
         buttonGroup1.add(admin_gender_female);
         admin_gender_female.setText("jCheckBox2");
         admin_gender_female.setBorder(null);
+        admin_gender_female.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                admin_gender_femaleActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout Admin_Autofill_PanelLayout = new javax.swing.GroupLayout(Admin_Autofill_Panel);
         Admin_Autofill_Panel.setLayout(Admin_Autofill_PanelLayout);
@@ -2025,9 +1967,9 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
             .addGroup(Admin_FormContrl_PanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(Admin_FormContrl_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Privilage_Edit_Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Admin_Autofill_Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(Admin_Autofill_Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Privilage_Edit_Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         Admin_privilage_Warning.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
@@ -2069,7 +2011,7 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
                 .addGap(0, 0, 0)
                 .addComponent(Admin_privilage_Warning)
                 .addGap(0, 0, 0)
-                .addComponent(Admin_FormContrl_Panel, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Admin_FormContrl_Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Iso_Text, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(23, 23, 23))
@@ -2272,7 +2214,7 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
                 .addComponent(Chart_ContentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(IsoCertified_Label1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
             .addGroup(Graphical_Edit_StatisticsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(Statistics_Buttons_Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 617, Short.MAX_VALUE))
         );
@@ -2521,9 +2463,9 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel11Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(uoe_admin_pic, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(uoe_students_pic, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
+                .addComponent(uoe_admin_pic, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(uoe_students_pic, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel11Layout.setVerticalGroup(
@@ -2587,7 +2529,7 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
                     .addGroup(jPanel10Layout.createSequentialGroup()
                         .addGap(12, 12, 12)
                         .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(24, 24, 24))
                     .addGroup(jPanel10Layout.createSequentialGroup()
@@ -3584,28 +3526,7 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
         Main_Dynamic_Panel.repaint();
         Main_Dynamic_Panel.revalidate();
         
-        
-        
-        try{
-        String query = "select date_of_input, student_id from student_info";
-        JDBCCategoryDataset Dataset = new JDBCCategoryDataset(javaconnect.ConnercrDb(), query);
-        
-        JFreeChart chart = ChartFactory.createLineChart("Line Chart", "test1", "tst2", Dataset, PlotOrientation.VERTICAL, false, true, true);
-        BarRenderer renderer = null;
-        CategoryPlot plot = null;
-        renderer = new BarRenderer();
-        
-        
-        
-        ChartPanel panel = new ChartPanel(chart);
-
-        Dashboard_Chart.removeAll();
-        Dashboard_Chart.add(panel, BorderLayout.CENTER);
-        Dashboard_Chart.validate();
-        
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(null, e);
-            }
+        FunctionControl.Autofill();
                                                                 
     }//GEN-LAST:event_menu_panel_btn1MousePressed
 
@@ -3644,7 +3565,7 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
                 }
         int h = uoe_admin_pic.getHeight();
         int w = uoe_admin_pic.getWidth();
-        ImageIcon icon1 = new ImageIcon(scaleimage(originalImage, w, h, type));
+        ImageIcon icon1 = new ImageIcon(FunctionControl.scaleimage(originalImage, w, h, type));
         uoe_admin_pic.setIcon(icon1);
         
         //First instance of image resize ends
@@ -3662,7 +3583,7 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
                 }
         int x = uoe_students_pic.getHeight();
         int y = uoe_students_pic.getWidth();
-        ImageIcon icon2 = new ImageIcon(scaleimage(originalImage2, y, x, type2));
+        ImageIcon icon2 = new ImageIcon(FunctionControl.scaleimage(originalImage2, y, x, type2));
         uoe_students_pic.setIcon(icon2);
         
         //Second instance of image resize ends
@@ -3680,7 +3601,7 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
                 }
         int m = uoe_header_logo.getHeight();
         int n = uoe_header_logo.getWidth();
-        ImageIcon icon3 = new ImageIcon(scaleimage(originalImage3, n, m, type3));
+        ImageIcon icon3 = new ImageIcon(FunctionControl.scaleimage(originalImage3, n, m, type3));
         uoe_header_logo.setIcon(icon3);
         
         //Third instance of image resize ends
@@ -3844,19 +3765,24 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
                 if(rs.getString("account_type").matches("block")){
                     Admin_block_Warning.setText("ACCOUNT BLOCKED");
                     }
-                    else if(rs.getString("account_type").isEmpty()){
+                    else if(rs.getString("account_type").isEmpty() || rs.wasNull()){
                     Admin_privilage_Warning.setText("USER PRIVILLAGE NOT SET");
                     }
                     else{String add7 =rs.getString("account_type");
                 account_privallage.setSelectedItem(add7);
                     }
 
-//                String add8 =rs.getString("gender");
-//                buttonGroup1.setSelected(add8, rootPaneCheckingEnabled);
-                }
+//                if(rs.getString("gender").matches("male")){
+//                 buttonGroup1.setSelected((ButtonModel) admin_gender_male, true);
+//                }
+//                else if(rs.getString("gender").matches("female")){
+//                 buttonGroup1.setSelected((ButtonModel) admin_gender_female, true);
+//                }
+            }
         
         }catch(Exception e){
         JOptionPane.showMessageDialog(null, e);
+        //Admin_privilage_Warning.setText("USER PRIVILLAGE NOT SET");
         }
     }//GEN-LAST:event_admin_signup_listMouseClicked
 
@@ -4040,6 +3966,10 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
         Admin_privilage_Warning.setText("");
     }//GEN-LAST:event_admin_signup_listMousePressed
 
+    private void admin_gender_femaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_admin_gender_femaleActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_admin_gender_femaleActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -4102,17 +4032,17 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
     private javax.swing.JPanel Admin_MiniHeader;
     private javax.swing.JLabel Admin_block_Warning;
     private javax.swing.JLabel Admin_privilage_Warning;
-    private javax.swing.JPanel All_Student_Edit_Panel;
+    public static javax.swing.JPanel All_Student_Edit_Panel;
     private javax.swing.JPanel All_Student_Input_Panel;
     private javax.swing.JPanel Chart_ContentPanel;
-    private javax.swing.JPanel Dashboard_Chart;
+    public static javax.swing.JPanel Dashboard_Chart;
     private javax.swing.JPanel Graphical_Edit_Statistics;
     private javax.swing.JPanel Header_Panel;
     private javax.swing.JLabel IsoCertified_Label;
     private javax.swing.JLabel IsoCertified_Label1;
     private javax.swing.JLabel IsoCertified_Label2;
     private javax.swing.JLabel Iso_Text;
-    private javax.swing.JPanel Main_Dynamic_Panel;
+    public static javax.swing.JPanel Main_Dynamic_Panel;
     private javax.swing.JPanel Menu_Panel;
     private javax.swing.JPanel MiniHeader_Panel;
     private javax.swing.JPanel Privilage_Edit_Panel;
@@ -4120,7 +4050,7 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
     private javax.swing.JPanel Statistics_Buttons_Panel;
     private javax.swing.JPanel Statistics_Header;
     private javax.swing.JPanel Statistics_MiniHeader;
-    private javax.swing.JPanel System_Edit_Dashboard;
+    public static javax.swing.JPanel System_Edit_Dashboard;
     private javax.swing.JButton account_block;
     private javax.swing.JButton account_delete;
     private javax.swing.JComboBox<String> account_privallage;
@@ -4136,7 +4066,7 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
     private javax.swing.JLabel cleared_fee;
     private javax.swing.JMenuItem close_pane_bar;
     private javax.swing.JTabbedPane database_tables;
-    private javax.swing.JMenu date;
+    public static javax.swing.JMenu date;
     private com.toedter.calendar.JDateChooser date_of_input;
     private javax.swing.JButton eligible_list_process;
     private javax.swing.JButton eligible_table_print;

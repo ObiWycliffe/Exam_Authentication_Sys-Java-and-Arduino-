@@ -19,7 +19,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
-import net.proteanit.sql.DbUtils;
+
 
 public class Admin_Login extends javax.swing.JFrame {
 Connection conn=null;
@@ -31,32 +31,13 @@ PreparedStatement pst=null;
     public Admin_Login() {
         initComponents();
         conn=javaconnect.ConnercrDb();
-    
     }
-    
-
-    //Function to resize image to Jlabel size
-
-    private BufferedImage scaleimage(BufferedImage img, int w, int h, int type){
-        BufferedImage resizedImage = new BufferedImage(w, h, type);
-        Graphics2D g = resizedImage.createGraphics();
-        g.drawImage(img, 0, 0, w, h, null);
-        g.dispose();
-        g.setComposite(AlphaComposite.Src);
-        
-        g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-        g.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-    
-        return resizedImage;
-    }
-    //Function to resize image to Jlabel size end
-    
 
     public void close(){
     WindowEvent winClosingEvent = new WindowEvent(this,WindowEvent.WINDOW_CLOSING);
     Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);
     }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -296,8 +277,7 @@ PreparedStatement pst=null;
     }//GEN-LAST:event_admin_usernameActionPerformed
 
     private void admin_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_admin_loginActionPerformed
-        // TODO add your handling code here:
-        
+
         //Check if fields are empty or not
         if(admin_username.getText().trim().isEmpty() && admin_password.getText().trim().isEmpty()){
             usernamewarning.setText("Username is empty");
@@ -342,6 +322,8 @@ PreparedStatement pst=null;
                 
                         Main_Activity_Frame s =new Main_Activity_Frame();
                         s.setVisible(true);
+                        
+                        //FunctionControl.LoadDash();
                         }
                     else{
                         JOptionPane.showMessageDialog(null, "Login Successfull");
@@ -357,12 +339,15 @@ PreparedStatement pst=null;
                 
                         Main_Activity_Frame s =new Main_Activity_Frame();
                         s.setVisible(true);
+                        
                         Main_Activity_Frame.menu_panel_btn4.hide();
+                        
+                        //FunctionControl.LoadDash();
                         }
                     }catch(Exception e){}
                     
                 }
-                else if(Account_Type.isEmpty() || Account_Type.matches(sql)){
+                else if(Account_Type.isEmpty() || rs.wasNull()){
                             JOptionPane.showMessageDialog(null, "NO PRIVILLAGE ASSIGNED!");
                         }
                 else{
@@ -374,20 +359,20 @@ PreparedStatement pst=null;
                         JOptionPane.showMessageDialog(null, "Username or Password incorrect ");
                         }
         }catch(Exception e){
-            JOptionPane.showMessageDialog(null, e);
-            }   finally {
-      
-            try{
-            rs.close();
-            pst.close();
-            }
-            catch(Exception e){}
+            JOptionPane.showMessageDialog(null, "NO PRIVILLAGE ASSIGNED!");
+            }   
+        finally {
+                try{
+                rs.close();
+                pst.close();
+                }
+                catch(Exception e){}
             }
         }
     }//GEN-LAST:event_admin_loginActionPerformed
 
     private void admin_passwordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_admin_passwordKeyPressed
-        // CUT
+
     }//GEN-LAST:event_admin_passwordKeyPressed
 
     private void jPanel1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel1KeyReleased
@@ -431,7 +416,7 @@ PreparedStatement pst=null;
                 Admin_Id = rs.getInt("admin_id");
                 
                 if(!Account_Type.isEmpty() && !Account_Type.matches("block")){
-                
+                    
                     try{
                     if(Account_Type.matches("Admin")){
                         JOptionPane.showMessageDialog(null, "Login Successfull");
@@ -447,6 +432,8 @@ PreparedStatement pst=null;
                 
                         Main_Activity_Frame s =new Main_Activity_Frame();
                         s.setVisible(true);
+                        
+                        //FunctionControl.LoadDash();
                         }
                     else{
                         JOptionPane.showMessageDialog(null, "Login Successfull");
@@ -462,12 +449,15 @@ PreparedStatement pst=null;
                 
                         Main_Activity_Frame s =new Main_Activity_Frame();
                         s.setVisible(true);
+                        
                         Main_Activity_Frame.menu_panel_btn4.hide();
+                        
+                        //FunctionControl.LoadDash();
                         }
                     }catch(Exception e){}
                     
                 }
-                else if(Account_Type.isEmpty() || Account_Type.matches(sql)){
+                else if(Account_Type.isEmpty() || rs.wasNull()){
                             JOptionPane.showMessageDialog(null, "NO PRIVILLAGE ASSIGNED!");
                         }
                 else{
@@ -479,7 +469,7 @@ PreparedStatement pst=null;
                         JOptionPane.showMessageDialog(null, "Username or Password incorrect ");
                         }
         }catch(Exception e){
-            JOptionPane.showMessageDialog(null, e);
+            JOptionPane.showMessageDialog(null, "NO PRIVILLAGE ASSIGNED!");
             }   finally {
       
             try{
@@ -529,21 +519,48 @@ PreparedStatement pst=null;
                 Admin_Id = rs.getInt("admin_id");
                 
                 if(!Account_Type.isEmpty() && !Account_Type.matches("block")){
-                JOptionPane.showMessageDialog(null, "Login Successfull");
+                    
+                    try{
+                    if(Account_Type.matches("Admin")){
+                        JOptionPane.showMessageDialog(null, "Login Successfull");
                 
-                //conection with db for login is closed
-                rs.close();
-                pst.close();
-                //conection with db for login is closed
+                        //conection with db for login is closed
+                        rs.close();
+                        pst.close();
+                        //conection with db for login is closed
                 
-                //function closes login window before opening data window
-                close();
-                //function closes login window before opening data window
+                        //function closes login window before opening data window
+                        close();
+                        //function closes login window before opening data window
                 
-                Main_Activity_Frame s =new Main_Activity_Frame();
-                s.setVisible(true);
+                        Main_Activity_Frame s =new Main_Activity_Frame();
+                        s.setVisible(true);
+                        
+                        //FunctionControl.LoadDash();
+                        }
+                    else{
+                        JOptionPane.showMessageDialog(null, "Login Successfull");
+                
+                        //conection with db for login is closed
+                        rs.close();
+                        pst.close();
+                        //conection with db for login is closed
+                
+                        //function closes login window before opening data window
+                        close();
+                        //function closes login window before opening data window
+                
+                        Main_Activity_Frame s =new Main_Activity_Frame();
+                        s.setVisible(true);
+                        
+                        Main_Activity_Frame.menu_panel_btn4.hide();
+                        
+                        //FunctionControl.LoadDash();
+                        }
+                    }catch(Exception e){}
+                    
                 }
-                else if(Account_Type.isEmpty() || Account_Type.matches(sql)){
+                else if(Account_Type.isEmpty() || rs.wasNull()){
                             JOptionPane.showMessageDialog(null, "NO PRIVILLAGE ASSIGNED!");
                         }
                 else{
@@ -555,7 +572,7 @@ PreparedStatement pst=null;
                         JOptionPane.showMessageDialog(null, "Username or Password incorrect ");
                         }
         }catch(Exception e){
-            JOptionPane.showMessageDialog(null, e);
+            JOptionPane.showMessageDialog(null, "NO PRIVILLAGE ASSIGNED!");
             }   finally {
       
             try{
@@ -597,21 +614,48 @@ PreparedStatement pst=null;
                 Admin_Id = rs.getInt("admin_id");
                 
                 if(!Account_Type.isEmpty() && !Account_Type.matches("block")){
-                JOptionPane.showMessageDialog(null, "Login Successfull");
+                    
+                    try{
+                    if(Account_Type.matches("Admin")){
+                        JOptionPane.showMessageDialog(null, "Login Successfull");
                 
-                //conection with db for login is closed
-                rs.close();
-                pst.close();
-                //conection with db for login is closed
+                        //conection with db for login is closed
+                        rs.close();
+                        pst.close();
+                        //conection with db for login is closed
                 
-                //function closes login window before opening data window
-                close();
-                //function closes login window before opening data window
+                        //function closes login window before opening data window
+                        close();
+                        //function closes login window before opening data window
                 
-                Main_Activity_Frame s =new Main_Activity_Frame();
-                s.setVisible(true);
+                        Main_Activity_Frame s =new Main_Activity_Frame();
+                        s.setVisible(true);
+                        
+                        //FunctionControl.LoadDash();
+                        }
+                    else{
+                        JOptionPane.showMessageDialog(null, "Login Successfull");
+                
+                        //conection with db for login is closed
+                        rs.close();
+                        pst.close();
+                        //conection with db for login is closed
+                
+                        //function closes login window before opening data window
+                        close();
+                        //function closes login window before opening data window
+                
+                        Main_Activity_Frame s =new Main_Activity_Frame();
+                        s.setVisible(true);
+                        
+                        Main_Activity_Frame.menu_panel_btn4.hide();
+                        
+                        //FunctionControl.LoadDash();
+                        }
+                    }catch(Exception e){}
+                    
                 }
-                else if(Account_Type.isEmpty() || Account_Type.matches(sql)){
+                else if(Account_Type.isEmpty() || rs.wasNull()){
                             JOptionPane.showMessageDialog(null, "NO PRIVILLAGE ASSIGNED!");
                         }
                 else{
@@ -623,7 +667,7 @@ PreparedStatement pst=null;
                         JOptionPane.showMessageDialog(null, "Username or Password incorrect ");
                         }
         }catch(Exception e){
-            JOptionPane.showMessageDialog(null, e);
+            JOptionPane.showMessageDialog(null, "NO PRIVILLAGE ASSIGNED!");
             }   finally {
       
             try{
@@ -663,7 +707,7 @@ PreparedStatement pst=null;
                 }
         int h = icon_label.getHeight();
         int w = icon_label.getWidth();
-        ImageIcon icon1 = new ImageIcon(scaleimage(originalImage, w, h, type));
+        ImageIcon icon1 = new ImageIcon(FunctionControl.scaleimage(originalImage, w, h, type));
         icon_label.setIcon(icon1);
     }//GEN-LAST:event_formWindowActivated
 
@@ -748,5 +792,7 @@ PreparedStatement pst=null;
 
     public static String User, Account_Type;
     public static int Admin_Id;
+    JPanel DashView = Main_Activity_Frame.System_Edit_Dashboard;
+    JPanel DefaultView = Main_Activity_Frame.All_Student_Edit_Panel;
 
 }
