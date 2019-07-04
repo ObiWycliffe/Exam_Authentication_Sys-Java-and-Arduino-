@@ -3,14 +3,11 @@ import java.awt.AlphaComposite;
 import java.awt.BorderLayout;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
-import java.awt.Toolkit;
-import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import static java.lang.Thread.sleep;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.logging.Level;
@@ -37,17 +34,17 @@ import org.jfree.data.jdbc.JDBCCategoryDataset;
  */
 public class FunctionControl {
     
-    Connection conn=null;
-    ResultSet rs =null;
-    PreparedStatement pst=null;
+    public static Connection conn=null;
+    public static ResultSet rs =null;
+    public static PreparedStatement pst=null;
     
     
     
     
     //Function to load Line graph on start of application
     public static void Autofill(){
-                try{
-        String query = "select date_of_input, student_id from student_info";
+        try{
+        String query = "select date_of_input, count(*) from student_info group by date_of_input";
         JDBCCategoryDataset Dataset = new JDBCCategoryDataset(javaconnect.ConnercrDb(), query);
         
         JFreeChart chart = ChartFactory.createLineChart("Line Chart", "test1", "tst2", Dataset, PlotOrientation.VERTICAL, false, true, true);
@@ -164,6 +161,50 @@ public class FunctionControl {
     Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);
     }
     */
+    
+    
+     
+    //Functions To set anchor label of account user type
+//    public static void AnchorLabel(){
+//        String User = Admin_Login.admin_username.getText().trim();
+//        String sql ="select * from admin_login where username='"+User+"'";
+//        
+//        try{
+//        pst=conn.prepareStatement(sql);
+//                    
+//        rs=pst.executeQuery();
+//        if(rs.next()){
+//            
+//                String userAccount = rs.getString("account_type");
+//                String userName = rs.getString("username");
+//        
+//                        try{
+//                            Main_Activity_Frame.account_label.setText(userAccount);
+//                            Change_Password.account_label_ChangeP.setText(userAccount);
+//                            
+//                             }catch(Exception e){
+//                                 JOptionPane.showMessageDialog(null, e);
+//                             }
+//                        try{
+//                             Main_Activity_Frame.user_label.setText(userName);
+//                             Change_Password.user_label_ChangeP.setText(userName);
+//
+//                             }catch(Exception e){
+//                                 JOptionPane.showMessageDialog(null, e);}
+//        }
+//        }catch(Exception e){
+//            JOptionPane.showMessageDialog(null, e);
+//            }
+//    }
+    //Functions To set anchor label of account user type end
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     

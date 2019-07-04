@@ -200,6 +200,11 @@ PreparedStatement pst=null;
 
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/minimise.png"))); // NOI18N
+        jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel8MousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -238,9 +243,7 @@ PreparedStatement pst=null;
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel8)
-                        .addGap(0, 0, 0)))
+                    .addComponent(jLabel8))
                 .addComponent(icon_label, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(48, 48, 48)
                 .addComponent(jLabel1)
@@ -339,7 +342,7 @@ PreparedStatement pst=null;
                         }
                     else{
                         JOptionPane.showMessageDialog(null, "Login Successfull");
-                
+                        
                         //conection with db for login is closed
                         rs.close();
                         pst.close();
@@ -360,21 +363,17 @@ PreparedStatement pst=null;
                         //Functions To set anchor label of account user type
                         try{
                             Main_Activity_Frame.account_label.setText(userAccount);
-                            
-                             //if(userAccount.matches("Admin")){
-                             //Main_Activity_Frame.account_label.setText("Admin");
-                             //}else{
-                             //Main_Activity_Frame.account_label.setText("Support Staff");}
-                             
+                            //Change_Password.account_label_ChangeP.setText(userAccount);
                              }catch(Exception e){
                                  JOptionPane.showMessageDialog(null, e);
                              }
                         try{
                              Main_Activity_Frame.user_label.setText(userName);
-
+                             //Change_Password.user_label_ChangeP.setText(userName);
                              }catch(Exception e){
                                  JOptionPane.showMessageDialog(null, e);}
                         //Functions To set anchor label of account user type end
+                         close();
                         
                     }catch(Exception e){}
                     
@@ -446,6 +445,8 @@ PreparedStatement pst=null;
                 User = admin_username.getText();
                 Account_Type = rs.getString("account_type");
                 Admin_Id = rs.getInt("admin_id");
+                String userAccount = rs.getString("account_type");
+                String userName = rs.getString("username");
                 
                 if(!Account_Type.isEmpty() && !Account_Type.matches("block")){
                     
@@ -486,6 +487,22 @@ PreparedStatement pst=null;
                         
                         //FunctionControl.LoadDash();
                         }
+                    
+                    //Functions To set anchor label of account user type
+                        try{
+                            Main_Activity_Frame.account_label.setText(userAccount);
+                            //Change_Password.account_label_ChangeP.setText(userAccount);
+                             }catch(Exception e){
+                                 JOptionPane.showMessageDialog(null, e);
+                             }
+                        try{
+                             Main_Activity_Frame.user_label.setText(userName);
+                             //Change_Password.user_label_ChangeP.setText(userName);
+                             }catch(Exception e){
+                                 JOptionPane.showMessageDialog(null, e);}
+                        //Functions To set anchor label of account user type end
+                         close();
+                        
                     }catch(Exception e){}
                     
                 }
@@ -549,6 +566,8 @@ PreparedStatement pst=null;
                 User = admin_username.getText();
                 Account_Type = rs.getString("account_type");
                 Admin_Id = rs.getInt("admin_id");
+                String userAccount = rs.getString("account_type");
+                String userName = rs.getString("username");
                 
                 if(!Account_Type.isEmpty() && !Account_Type.matches("block")){
                     
@@ -589,6 +608,21 @@ PreparedStatement pst=null;
                         
                         //FunctionControl.LoadDash();
                         }
+                    //Functions To set anchor label of account user type
+                        try{
+                            Main_Activity_Frame.account_label.setText(userAccount);
+                            //Change_Password.account_label_ChangeP.setText(userAccount);
+                             }catch(Exception e){
+                                 JOptionPane.showMessageDialog(null, e);
+                             }
+                        try{
+                             Main_Activity_Frame.user_label.setText(userName);
+                             //Change_Password.user_label_ChangeP.setText(userName);
+                             }catch(Exception e){
+                                 JOptionPane.showMessageDialog(null, e);}
+                        //Functions To set anchor label of account user type end
+                         close();
+                        
                     }catch(Exception e){}
                     
                 }
@@ -644,6 +678,8 @@ PreparedStatement pst=null;
                 User = admin_username.getText();
                 Account_Type = rs.getString("account_type");
                 Admin_Id = rs.getInt("admin_id");
+                String userAccount = rs.getString("account_type");
+                String userName = rs.getString("username");
                 
                 if(!Account_Type.isEmpty() && !Account_Type.matches("block")){
                     
@@ -684,6 +720,22 @@ PreparedStatement pst=null;
                         
                         //FunctionControl.LoadDash();
                         }
+                    //Functions To set anchor label of account user type
+                    
+                        try{
+                            Main_Activity_Frame.account_label.setText(userAccount);
+                            //Change_Password.account_label_ChangeP.setText(userAccount);
+                             }catch(Exception e){
+                                 JOptionPane.showMessageDialog(null, e);
+                             }
+                        try{
+                             Main_Activity_Frame.user_label.setText(userName);
+                             //Change_Password.user_label_ChangeP.setText(userName);
+                             }catch(Exception e){
+                                 JOptionPane.showMessageDialog(null, e);}
+                        //Functions To set anchor label of account user type end
+                         close();
+                        
                     }catch(Exception e){}
                     
                 }
@@ -766,6 +818,11 @@ PreparedStatement pst=null;
         //CUT  
     }//GEN-LAST:event_admin_usernameKeyPressed
 
+    private void jLabel8MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MousePressed
+        // Minimise window to taskbar
+        this.setState(Frame.ICONIFIED);
+    }//GEN-LAST:event_jLabel8MousePressed
+
     /**
      * @param args the command line arguments
      */
@@ -806,7 +863,7 @@ PreparedStatement pst=null;
     private javax.swing.JButton admin_login;
     private javax.swing.JPasswordField admin_password;
     private javax.swing.JButton admin_signup;
-    private javax.swing.JTextField admin_username;
+    public static javax.swing.JTextField admin_username;
     private javax.swing.JLabel icon_label;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

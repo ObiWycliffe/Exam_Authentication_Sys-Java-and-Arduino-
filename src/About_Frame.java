@@ -59,8 +59,9 @@ public class About_Frame extends javax.swing.JFrame {
         jLabel3.setText("Obi Wycliffe");
 
         jLabel4.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel4.setText("Copyright 2019. All rights reseraved");
+        jLabel4.setText("@Copyright 2019. All rights reseraved");
 
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Dark.png"))); // NOI18N
 
         jLabel6.setForeground(new java.awt.Color(102, 102, 102));
