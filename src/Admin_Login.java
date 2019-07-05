@@ -339,6 +339,7 @@ PreparedStatement pst=null;
                         s.setVisible(true);
                         
                         //FunctionControl.LoadDash();
+                        //FunctionControl.Next_Number();
                         }
                     else{
                         JOptionPane.showMessageDialog(null, "Login Successfull");
@@ -358,6 +359,7 @@ PreparedStatement pst=null;
                         Main_Activity_Frame.menu_panel_btn4.hide();
                         
                         //FunctionControl.LoadDash();
+                        //FunctionControl.Next_Number();
                         }
                     
                         //Functions To set anchor label of account user type
