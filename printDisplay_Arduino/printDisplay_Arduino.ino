@@ -1,3 +1,5 @@
+#include <LiquidCrystal.h>
+
  
 #include <Adafruit_Fingerprint.h>
 #include <LiquidCrystal_I2C.h>
