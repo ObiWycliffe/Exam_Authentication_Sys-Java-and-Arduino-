@@ -42,6 +42,7 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.renderer.category.BarRenderer;
+import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.jdbc.JDBCCategoryDataset;
 import org.jfree.data.jdbc.JDBCPieDataset;
 
@@ -50,9 +51,15 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
     ResultSet rs =null;
     ResultSet rs1 =null;
     ResultSet rs2 =null;
+    ResultSet rs3 =null;
+    ResultSet rs4 =null;
+    ResultSet rs5 =null;
     PreparedStatement pst=null;
     PreparedStatement pst1=null;
     PreparedStatement pst2=null;
+    PreparedStatement pst3=null;
+    PreparedStatement pst4=null;
+    PreparedStatement pst5=null;
     
     
     /**
@@ -401,6 +408,7 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        jButton7 = new javax.swing.JButton();
         jLabel28 = new javax.swing.JLabel();
         jLabel31 = new javax.swing.JLabel();
         jLabel32 = new javax.swing.JLabel();
@@ -412,7 +420,7 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
         Chart_ContentPanel = new javax.swing.JPanel();
         StatisticsChanger = new javax.swing.JPanel();
         male_female_pie = new javax.swing.JPanel();
-        fee_PieChart = new javax.swing.JPanel();
+        fee_StatsChart = new javax.swing.JPanel();
         IsoCertified_Label1 = new javax.swing.JLabel();
         System_Edit_Dashboard = new javax.swing.JPanel();
         Dashboard_Chart = new javax.swing.JPanel();
@@ -1886,7 +1894,7 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
                         .addComponent(studentTables_panel, javax.swing.GroupLayout.PREFERRED_SIZE, 637, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())
                     .addComponent(IsoCertified_Label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-            .addComponent(Header_Panel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1182, Short.MAX_VALUE)
+            .addComponent(Header_Panel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1148, Short.MAX_VALUE)
         );
         All_Student_Edit_PanelLayout.setVerticalGroup(
             All_Student_Edit_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2309,7 +2317,7 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Gender Distribution per School");
+        jButton2.setText("Student Registerd per Day");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -2327,6 +2335,14 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
+            }
+        });
+
+        jButton7.setText("Gender Distribution per School");
+        jButton7.setPreferredSize(new java.awt.Dimension(185, 25));
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
             }
         });
 
@@ -2353,12 +2369,14 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
                     .addComponent(jLabel32, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel50, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(3, 3, 3)
-                .addGroup(Statistics_Buttons_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pie_chart, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(Statistics_Buttons_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(Statistics_Buttons_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(pie_chart, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(69, Short.MAX_VALUE))
         );
         Statistics_Buttons_PanelLayout.setVerticalGroup(
@@ -2373,14 +2391,16 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
                     .addComponent(jLabel31, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton1))
                 .addGap(26, 26, 26)
-                .addGroup(Statistics_Buttons_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(Statistics_Buttons_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
                 .addGroup(Statistics_Buttons_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton3)
                     .addComponent(jLabel49, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 165, Short.MAX_VALUE)
+                .addGap(32, 32, 32)
+                .addComponent(jButton2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 108, Short.MAX_VALUE)
                 .addGroup(Statistics_Buttons_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel50, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -2428,8 +2448,8 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
         male_female_pie.setBackground(new java.awt.Color(0, 153, 51));
         male_female_pie.setLayout(new java.awt.BorderLayout());
 
-        fee_PieChart.setBackground(new java.awt.Color(0, 153, 102));
-        fee_PieChart.setLayout(new java.awt.BorderLayout());
+        fee_StatsChart.setBackground(new java.awt.Color(0, 153, 102));
+        fee_StatsChart.setLayout(new java.awt.BorderLayout());
 
         javax.swing.GroupLayout Chart_ContentPanelLayout = new javax.swing.GroupLayout(Chart_ContentPanel);
         Chart_ContentPanel.setLayout(Chart_ContentPanelLayout);
@@ -2440,7 +2460,7 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
                 .addComponent(StatisticsChanger, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(Chart_ContentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(fee_PieChart, javax.swing.GroupLayout.DEFAULT_SIZE, 265, Short.MAX_VALUE)
+                    .addComponent(fee_StatsChart, javax.swing.GroupLayout.DEFAULT_SIZE, 265, Short.MAX_VALUE)
                     .addComponent(male_female_pie, javax.swing.GroupLayout.DEFAULT_SIZE, 265, Short.MAX_VALUE))
                 .addGap(5, 5, 5))
         );
@@ -2452,7 +2472,7 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Chart_ContentPanelLayout.createSequentialGroup()
                         .addComponent(male_female_pie, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(fee_PieChart, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(fee_StatsChart, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(StatisticsChanger, javax.swing.GroupLayout.PREFERRED_SIZE, 415, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -2483,14 +2503,14 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
             Graphical_Edit_StatisticsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Graphical_Edit_StatisticsLayout.createSequentialGroup()
                 .addComponent(Statistics_Header, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                 .addComponent(Chart_ContentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(IsoCertified_Label1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0))
             .addGroup(Graphical_Edit_StatisticsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Graphical_Edit_StatisticsLayout.createSequentialGroup()
-                    .addGap(0, 86, Short.MAX_VALUE)
+                    .addGap(0, 96, Short.MAX_VALUE)
                     .addComponent(Statistics_Buttons_Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
@@ -2630,9 +2650,8 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
                 .addGap(65, 65, 65)
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel58, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabel54, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel55, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jLabel54, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel55, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel13Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -3160,15 +3179,19 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
             pst.setBytes(9, person_image);
             
             try{
-            String sqlFee ="insert into feebal (student_id, student_regno, feedue, feepaid) values (?,?,?,?)";
+            String sqlFee ="insert into feebal (student_id, student_regno, school, feedue, feepaid) values (?,?,?,?,?)";
             
             double x = 0;
-            double y = 13000;
+            double y = 13100;
             pst1=conn.prepareStatement(sqlFee);
             pst1.setString(1, studentid.getText());
             pst1.setString(2, student_regno.getText());
-            pst1.setDouble(3, y);
-            pst1.setDouble(4, x);
+            
+            String valueFee=school.getSelectedItem().toString();
+            pst1.setString(3, valueFee);
+            
+            pst1.setDouble(4, y);
+            pst1.setDouble(5, x);
             
             }catch(Exception e){
                 JOptionPane.showMessageDialog(null, e);
@@ -3191,7 +3214,8 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
             //Confirmation to save student dialog box
             
             JOptionPane.showMessageDialog(null, "Saved");
-            }catch(Exception e){}
+            }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);}
         Update_table();
         
     }//GEN-LAST:event_form_saveActionPerformed
@@ -3249,7 +3273,7 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
 //                    String value1Fee= studentid.getText();
 //                    String value2Fee= student_regno.getText();
 
-                    String sqlFee="update feebal set student_id='"+value1+"' , student_regno='"+value2+"' where student_id='"+value1+"'";
+                    String sqlFee="update feebal set student_id='"+value1+"' , student_regno='"+value2+"', school='"+value7+"' where student_id='"+value1+"'";
                     pst1=conn.prepareStatement(sqlFee);
 //                    }catch(Exception e){
 //                        JOptionPane.showMessageDialog(null, e);
@@ -3882,7 +3906,7 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
 
     private void close_pane_barActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_close_pane_barActionPerformed
         // TODO add your handling code here:
-        close();
+        System.exit(0);
 
     }//GEN-LAST:event_close_pane_barActionPerformed
 
@@ -3914,38 +3938,161 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
 
     private void pie_chartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pie_chartActionPerformed
         
-        try {
-//            String cleared = "select count(*) from feebal where feepaid = feedue";
-//            String pastMark = "select count(*) from feebal where feepaid >= (2/3)*feedue";
-//            String belowMark = "select count(*) from feebal where feepaid <= '3000'";
+        try{
+            String sql="select * from feebal";
+            String sql1="select * from feebal";
+            String sql2="select * from feebal";
+            String sql3="select * from feebal";
+            String sql4="select * from feebal";
+            String sql5="select * from feebal";
             
-            String All = "select school, count(*) from student_info group by school";
-//            String cleared = "select count(*) from feebal where 'feepaid' = 'feedue'";
-//            String pastMark = "select count(*) from feebal where feepaid >= (2/3)*feedue";
-//            String belowMark = "select count(*) from feebal where feepaid <= '3000'";
-            JDBCCategoryDataset Dataset = new JDBCCategoryDataset(javaconnect.ConnercrDb());
-            Dataset.executeQuery(All);
-//            Dataset.executeQuery(cleared);
-//            Dataset.executeQuery(pastMark);
-//            Dataset.executeQuery(belowMark);
             
-            JFreeChart barchart = ChartFactory.createBarChart("Bar Graph", "School", "Gender", Dataset, PlotOrientation.VERTICAL, false,true,false);
-            //BarRenderer render = null;
+            pst=conn.prepareStatement(sql);
+            pst1=conn.prepareStatement(sql1);
+            pst2=conn.prepareStatement(sql2);
+            pst3=conn.prepareStatement(sql3);
+            pst4=conn.prepareStatement(sql4);
+            pst5=conn.prepareStatement(sql5);
             
+            rs=pst.executeQuery(sql);
+            rs1=pst1.executeQuery(sql1);
+            rs2=pst2.executeQuery(sql2);
+            rs3=pst3.executeQuery(sql3);
+            rs4=pst4.executeQuery(sql4);
+            rs5=pst5.executeQuery(sql5);
+            
+            
+            int p=0;
+            int o=0;
+            int i=0;
+            while(rs.next()){
+                String graphSchool = rs.getString("school");
+                double due = rs.getDouble("feedue");
+                double paid = rs.getDouble("feepaid");
+                if ("SCIENCE".equals(graphSchool) && due == paid){
+                    p++;}else  if ("SCIENCE".equals(graphSchool) && paid >= due/4 && paid < due){
+                            o++;}else  if ("SCIENCE".equals(graphSchool) && paid < due/4){
+                                        i++;
+                                        }
+                }
+            
+            int m=0;
+            int n=0;
+            int c=0;
+            while(rs1.next()){
+                String graphSchool = rs1.getString("school");
+                double due = rs1.getDouble("feedue");
+                double paid = rs1.getDouble("feepaid");
+                if ("ENGINEERING".equals(graphSchool) && due == paid){
+                    m++;}else  if ("ENGINEERING".equals(graphSchool) && paid >= due/4 && paid < due){
+                            n++;}else  if ("ENGINEERING".equals(graphSchool) && paid < due/4){
+                                        c++;
+                                        }
+                }
+            
+            int q=0;
+            int r=0;
+            int w=0;
+            while(rs2.next()){
+                String graphSchool = rs2.getString("school");
+                double due = rs2.getDouble("feedue");
+                double paid = rs2.getDouble("feepaid");
+                if ("EDUCATION".equals(graphSchool) && due == paid){
+                    q++;}else  if ("EDUCATION".equals(graphSchool) && paid >= due/4 && paid < due){
+                            r++;}else  if ("EDUCATION".equals(graphSchool) && paid < due/4){
+                                        w++;
+                                        }
+                }
+            
+            int a=0;
+            int b=0;
+            int d=0;
+            while(rs3.next()){
+                String graphSchool = rs3.getString("school");
+                double due = rs3.getDouble("feedue");
+                double paid = rs3.getDouble("feepaid");
+                if ("BUSINESS".equals(graphSchool) && due == paid){
+                    a++;}else  if ("BUSINESS".equals(graphSchool) && paid >= due/4 && paid < due){
+                            b++;}else  if ("BUSINESS".equals(graphSchool) && paid < due/4){
+                                        d++;
+                                        }
+                }
+            
+            int e=0;
+            int f=0;
+            int j=0;
+            while(rs4.next()){
+                String graphSchool = rs4.getString("school");
+                double due = rs4.getDouble("feedue");
+                double paid = rs4.getDouble("feepaid");
+                if ("HOTEL & HOSPITALITY".equals(graphSchool) && due == paid){
+                    e++;}else  if ("HOTEL & HOSPITALITY".equals(graphSchool) && paid >= due/4 && paid < due){
+                            f++;}else  if ("HOTEL & HOSPITALITY".equals(graphSchool) && paid < due/4){
+                                        j++;
+                                        }
+                }
+            
+            int g=0;
+            int h=0;
+            int k=0;
+            while(rs5.next()){
+                String graphSchool = rs5.getString("school");
+                double due = rs5.getDouble("feedue");
+                double paid = rs5.getDouble("feepaid");
+                if ("FORESTRY".equals(graphSchool) && due == paid){
+                    g++;}else  if ("FORESTRY".equals(graphSchool) && paid >= due/4 && paid < due){
+                            h++;}else  if ("FORESTRY".equals(graphSchool) && paid < due/4){
+                                        k++;
+                                        }
+                }
+        
+        final String cleared = "CLEARED";        
+        final String pending = "PENDING";
+        final String minPay = "LOW PAY";
+        final String science = "Science";        
+        final String engineering = "Engineering";        
+        final String education = "Education";        
+        final String business = "Business"; 
+        final String hotels = "Hotel & Hospitality"; 
+        final String forestry = "Forestry"; 
+        
+         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+    
+        dataset.setValue( p , cleared , science );        
+        dataset.setValue( m , cleared , engineering );        
+        dataset.setValue( q , cleared , education ); 
+        dataset.setValue( a , cleared , business );
+        dataset.setValue( e , cleared , hotels );
+        dataset.setValue( g , cleared , forestry );
+
+        dataset.setValue( o , pending , science );        
+        dataset.setValue( n , pending , engineering );       
+        dataset.setValue( r , pending , education );        
+        dataset.setValue( b , pending , business );
+        dataset.setValue( f , pending , hotels );
+        dataset.setValue( h , pending , forestry );
+        
+        dataset.setValue( i , minPay , science );        
+        dataset.setValue( c , minPay , engineering );       
+        dataset.setValue( w , minPay , education );        
+        dataset.setValue( d , minPay , business );
+        dataset.setValue( j , minPay , hotels );
+        dataset.setValue( k , minPay , forestry );
+                        
+            JFreeChart barchart = ChartFactory.createBarChart("Bar Graph", "School", "Gender", dataset, PlotOrientation.VERTICAL, false,true,false);
             CategoryPlot bar = barchart.getCategoryPlot();
             bar.setRangeGridlinePaint(Color.ORANGE);
-            //bar.getRenderer().setSeriesPaint(0, Color.green);
-            //bar.getRenderer().setSeriesPaint(1, Color.yellow);
-            //render = new BarRenderer();
+            
             
             ChartPanel barPanel = new ChartPanel(barchart);
             
             StatisticsChanger.removeAll();
             StatisticsChanger.add(barPanel, BorderLayout.CENTER);
             StatisticsChanger.validate();
-        } catch (SQLException ex) {
-            Logger.getLogger(Main_Activity_Frame.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            
+            }catch(Exception e){
+                JOptionPane.showMessageDialog(null, e);
+                }                
                      
     }//GEN-LAST:event_pie_chartActionPerformed
 
@@ -4160,7 +4307,7 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         
         try{
-        String query = "select date_of_input, student_id from student_info";
+        String query = "select date_of_input, count(*) from student_info group by date_of_input";
         JDBCCategoryDataset Dataset = new JDBCCategoryDataset(javaconnect.ConnercrDb(), query);
         
         JFreeChart chart = ChartFactory.createStackedAreaChart("Line Chart", "test1", "tst2", Dataset, PlotOrientation.VERTICAL, false, true, true);
@@ -4170,9 +4317,9 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
         
         ChartPanel panel = new ChartPanel(chart);
 
-        fee_PieChart.removeAll();
-        fee_PieChart.add(panel, BorderLayout.CENTER);
-        fee_PieChart.validate();
+        fee_StatsChart.removeAll();
+        fee_StatsChart.add(panel, BorderLayout.CENTER);
+        fee_StatsChart.validate();
         
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, e);
@@ -4618,6 +4765,139 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
         Update_table();
     }//GEN-LAST:event_jButton5ActionPerformed
 
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        // Code to fill bar graph with gender ratio per school
+        try{
+            String sql="select * from student_info";
+            String sql1="select * from student_info";
+            String sql2="select * from student_info";
+            String sql3="select * from student_info";
+            String sql4="select * from student_info";
+            String sql5="select * from student_info";
+            
+            
+            pst=conn.prepareStatement(sql);
+            pst1=conn.prepareStatement(sql1);
+            pst2=conn.prepareStatement(sql2);
+            pst3=conn.prepareStatement(sql3);
+            pst4=conn.prepareStatement(sql4);
+            pst5=conn.prepareStatement(sql5);
+            
+            rs=pst.executeQuery(sql);
+            rs1=pst1.executeQuery(sql1);
+            rs2=pst2.executeQuery(sql2);
+            rs3=pst3.executeQuery(sql3);
+            rs4=pst4.executeQuery(sql4);
+            rs5=pst5.executeQuery(sql5);
+            
+            
+            int p=0;
+            int o=0;
+            while(rs.next()){
+                String graphSchool = rs.getString("school");
+                String graphGender = rs.getString("gender");
+                if ("SCIENCE".equals(graphSchool) && "male".equals(graphGender)){
+                    p++;}else  if ("SCIENCE".equals(graphSchool) && "female".equals(graphGender)){
+                            o++;
+                            }
+                }
+            
+            int m=0;
+            int n=0;
+            while(rs1.next()){
+                String graphSchool = rs1.getString("school");
+                String graphGender = rs1.getString("gender");
+                if ("ENGINEERING".equals(graphSchool) && "male".equals(graphGender)){
+                    m++;}else  if ("ENGINEERING".equals(graphSchool) && "female".equals(graphGender)){
+                            n++;
+                            }
+                }
+            
+            int q=0;
+            int r=0;
+            while(rs2.next()){
+                String graphSchool = rs2.getString("school");
+                String graphGender = rs2.getString("gender");
+                if ("EDUCATION".equals(graphSchool) && "male".equals(graphGender)){
+                    q++;}else if ("EDUCATION".equals(graphSchool) && "female".equals(graphGender)){
+                            r++;
+                            }
+                }
+            
+            int a=0;
+            int b=0;
+            while(rs3.next()){
+                String graphSchool = rs3.getString("school");
+                String graphGender = rs3.getString("gender");
+                if ("BUSINESS".equals(graphSchool) && "male".equals(graphGender)){
+                    a++;}else  if ("BUSINESS".equals(graphSchool) && "female".equals(graphGender)){
+                            b++;
+                            }
+                }
+            
+            int e=0;
+            int f=0;
+            while(rs4.next()){
+                String graphSchool = rs4.getString("school");
+                String graphGender = rs4.getString("gender");
+                if ("HOTEL & HOSPITALITY".equals(graphSchool) && "male".equals(graphGender)){
+                    e++;}else  if ("HOTEL & HOSPITALITY".equals(graphSchool) && "female".equals(graphGender)){
+                            f++;
+                            }
+                }
+            
+            int g=0;
+            int h=0;
+            while(rs5.next()){
+                String graphSchool = rs5.getString("school");
+                String graphGender = rs5.getString("gender");
+                if ("FORESTRY".equals(graphSchool) && "male".equals(graphGender)){
+                    g++;}else  if ("FORESTRY".equals(graphSchool) && "female".equals(graphGender)){
+                            h++;
+                            }
+                }
+        
+        final String male = "MALE";        
+        final String female = "FEMALE";    
+        final String science = "Science";        
+        final String engineering = "Engineering";        
+        final String education = "Education";        
+        final String business = "Business"; 
+        final String hotels = "Hotel & Hospitality"; 
+        final String forestry = "Forestry"; 
+        
+         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+    
+        dataset.setValue( p , male , science );        
+        dataset.setValue( m , male , engineering );        
+        dataset.setValue( q , male , education ); 
+        dataset.setValue( a , male , business );
+        dataset.setValue( e , male , hotels );
+        dataset.setValue( g , male , forestry );
+
+        dataset.setValue( o , female , science );        
+        dataset.setValue( n , female , engineering );       
+        dataset.setValue( r , female , education );        
+        dataset.setValue( b , female , business );
+        dataset.setValue( f , female , hotels );
+        dataset.setValue( h , female , forestry );
+                        
+            JFreeChart barchart = ChartFactory.createBarChart("Bar Graph", "School", "Gender", dataset, PlotOrientation.VERTICAL, false,true,false);
+            CategoryPlot bar = barchart.getCategoryPlot();
+            bar.setRangeGridlinePaint(Color.ORANGE);
+            
+            
+            ChartPanel barPanel = new ChartPanel(barchart);
+            
+            StatisticsChanger.removeAll();
+            StatisticsChanger.add(barPanel, BorderLayout.CENTER);
+            StatisticsChanger.validate();
+            
+            }catch(Exception e){
+                JOptionPane.showMessageDialog(null, e);
+                }
+    }//GEN-LAST:event_jButton7ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -4734,7 +5014,7 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
     private javax.swing.JButton eligible_table_print;
     private javax.swing.JButton eligible_table_reset;
     private javax.swing.JTable exam_eligible_table;
-    private javax.swing.JPanel fee_PieChart;
+    private javax.swing.JPanel fee_StatsChart;
     private javax.swing.JTextField fee_balance;
     private javax.swing.JPanel fee_balance_panel;
     private javax.swing.JTable fee_balance_table;
@@ -4762,6 +5042,7 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
