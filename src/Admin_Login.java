@@ -375,6 +375,8 @@ PreparedStatement pst=null;
                              }catch(Exception e){
                                  JOptionPane.showMessageDialog(null, e);}
                         //Functions To set anchor label of account user type end
+                        
+                        //FunctionControl.Next_Number();
                          close();
                         
                     }catch(Exception e){}

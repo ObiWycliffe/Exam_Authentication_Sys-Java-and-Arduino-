@@ -169,7 +169,7 @@ public class Change_Password extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGap(0, 24, Short.MAX_VALUE)
+                .addGap(0, 19, Short.MAX_VALUE)
                 .addComponent(jLabel36)
                 .addGap(4, 4, 4)
                 .addComponent(jLabel47)
@@ -264,9 +264,9 @@ public class Change_Password extends javax.swing.JFrame {
                     .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(133, 133, 133)
+                .addGap(140, 140, 140)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(140, 140, 140))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -334,24 +334,25 @@ public class Change_Password extends javax.swing.JFrame {
          String value2= change_passNew.getText();
          //String value3= change_passConfirm.getText();
          String User = Admin_Login.admin_username.getText().trim();
-        
-         try{
-            if(!change_passNew.getText().trim().equals(change_passConfirm.getText().trim())){
-            //JOptionPane.showMessageDialog(null, "Password Dont Match");
-            passMatch_warning.setText("Passwords Do Not Match");}
-            }catch(Exception e){}
          
          try{
             String Proof = "select password from admin_login where username = '"+User+"'";
             pst=conn.prepareStatement(Proof);
                 
             rs = pst.executeQuery(Proof);
-                
-             if(rs.next()){
+             
+            if(!change_passNew.getText().trim().equals(change_passConfirm.getText().trim())){
+            //JOptionPane.showMessageDialog(null, "Password Dont Match");
+            passMatch_warning.setText("Passwords Do Not Match");}
+            
+            else if(rs.next()){
                 String p =rs.getString("password");
                 
                 try{
-                    if(value1 == null ? p != null : !value1.equals(p)){
+                    if(value2.equals(value1)){
+                    proofWarning.setText("Old password. Try again");
+                    }
+                    else if(value1 == null ? p != null : !value1.equals(p)){
                         //JOptionPane.showMessageDialog(null, "Invalid input for Old Password");
                         proofWarning.setText("Invalid input for Old Password");
                     }
@@ -362,18 +363,23 @@ public class Change_Password extends javax.swing.JFrame {
                             pst.execute();
                             JOptionPane.showMessageDialog(null, "Password Changed Successfully");
 
+//                            close();
+                            this.dispose();
+//                            
+//                            Admin_Login l =new Admin_Login();
+//                            l.setVisible(true);
+                            
 //                            Main_Activity_Frame MainFrame = new Main_Activity_Frame();
-//                            MainFrame.close();
-//                            this.dispose();
+//                            MainFrame.setVisible(false);
+//                            MainFrame.dispose();
+//                            MainFrame = null;
         
-                            Admin_Login l =new Admin_Login();
-                            l.setVisible(true);
-
                             }catch(Exception e){
                             JOptionPane.showMessageDialog(null, e);}
                             }
                         }catch(Exception e){
                             JOptionPane.showMessageDialog(null, e);}
+                
                 }
             }catch(Exception e){
                    JOptionPane.showMessageDialog(null, e);

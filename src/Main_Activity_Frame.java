@@ -133,7 +133,7 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
   
     //fee bal table start , needs to be on new jtable  
       try{
-      String sql ="select student_id as 'Student Id', feedue as 'Fee Due',feepaid as 'Fee Paid', feebal as 'Fee Balance' from feebal";
+      String sql ="select student_id as 'No.', student_regno as 'Registration No', feedue as 'Fee Due',feepaid as 'Fee Paid', feebal as 'Fee Balance' from feebal";
       pst=conn.prepareStatement(sql);
       rs=pst.executeQuery();
       fee_balance_table.setModel(DbUtils.resultSetToTableModel(rs));
@@ -156,7 +156,7 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
       //elligible students table fill starts
       
       try{
-      String sql ="select student_id as 'Student Id', feedue as 'Fee Due', feepaid as 'Fee Paid'  from feebal";
+      String sql ="select student_id as 'No.', student_regno as 'Registration No', feedue as 'Fee Due', feepaid as 'Fee Paid'  from feebal";
       pst=conn.prepareStatement(sql);
       rs=pst.executeQuery();
       exam_eligible_table.setModel(DbUtils.resultSetToTableModel(rs));
@@ -297,6 +297,7 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        jButton5 = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         exam_eligible_table = new javax.swing.JTable();
@@ -459,7 +460,7 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
         jLabel68 = new javax.swing.JLabel();
         jLabel40 = new javax.swing.JLabel();
         jLabel41 = new javax.swing.JLabel();
-        jButton5 = new javax.swing.JButton();
+        viewAll = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         uoe_header_logo = new javax.swing.JLabel();
@@ -1104,6 +1105,13 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jButton5.setText("Refresh");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -1114,7 +1122,8 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 596, Short.MAX_VALUE)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(fee_balance_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton5)))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -1122,9 +1131,14 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(fee_balance_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(6, 6, 6))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(fee_balance_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(jButton5)))
+                .addContainerGap())
         );
 
         database_tables.addTab("Fee Balance Check", jPanel4);
@@ -1433,7 +1447,7 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
             studentTables_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(studentTables_panelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(database_tables, javax.swing.GroupLayout.PREFERRED_SIZE, 396, Short.MAX_VALUE)
+                .addComponent(database_tables, javax.swing.GroupLayout.DEFAULT_SIZE, 396, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1478,10 +1492,10 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(102, 34, 0));
 
         student_surname.setBackground(new java.awt.Color(255, 255, 255));
-        student_surname.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        student_surname.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
 
         student_firstname.setBackground(new java.awt.Color(255, 255, 255));
-        student_firstname.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        student_firstname.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         student_firstname.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 student_firstnameActionPerformed(evt);
@@ -1506,7 +1520,7 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
         jLabel11.setText("Date of Input");
 
         school.setBackground(new java.awt.Color(255, 255, 255));
-        school.setFont(new java.awt.Font("Century Gothic", 1, 10)); // NOI18N
+        school.setFont(new java.awt.Font("Century Gothic", 0, 10)); // NOI18N
         school.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "**Select Your School<", "SCIENCE", "ENGINEERING", "EDUCATION", "BUSINESS", "HOTEL & HOSPITALITY", "FORESTRY" }));
         school.setToolTipText("Select School");
         school.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -1563,14 +1577,14 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
         jLabel21.setText("Registration No");
 
         student_regno.setBackground(new java.awt.Color(255, 255, 255));
-        student_regno.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        student_regno.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
 
         jLabel22.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         jLabel22.setForeground(new java.awt.Color(255, 255, 255));
         jLabel22.setText("Last Name");
 
         student_lastname.setBackground(new java.awt.Color(255, 255, 255));
-        student_lastname.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        student_lastname.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -1665,7 +1679,7 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
         );
 
         imagepath.setBackground(new java.awt.Color(255, 255, 255));
-        imagepath.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        imagepath.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
 
         image_attach.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/attachment.png"))); // NOI18N
         image_attach.setText("Image");
@@ -1681,7 +1695,7 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
         });
 
         studentid.setBackground(new java.awt.Color(255, 255, 255));
-        studentid.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        studentid.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         studentid.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 studentidActionPerformed(evt);
@@ -2008,6 +2022,7 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
         Iso_Text.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Iso_Text.setText("UNIVERSITY OF ELDORET IS ISO CERTIFIED UNDER NO. 1900200 **** *****");
 
+        account_privallage.setFont(new java.awt.Font("Century Gothic", 0, 11)); // NOI18N
         account_privallage.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "**Select Privilage<*", "Admin", "Support Staff" }));
         account_privallage.setToolTipText("");
 
@@ -2064,7 +2079,7 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
                 .addComponent(jLabel24)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(account_privallage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(122, 122, 122)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 110, Short.MAX_VALUE)
                 .addComponent(account_block)
                 .addGap(18, 18, 18)
                 .addComponent(account_unblock)
@@ -2072,7 +2087,7 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
                 .addComponent(privillage_update)
                 .addGap(25, 25, 25)
                 .addComponent(account_delete)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(23, 23, 23))
         );
 
         jLabel29.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
@@ -2081,6 +2096,7 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
         jLabel25.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         jLabel25.setText("Gender");
 
+        txt_employment_no.setFont(new java.awt.Font("Century Gothic", 0, 11)); // NOI18N
         txt_employment_no.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_employment_noActionPerformed(evt);
@@ -2095,6 +2111,7 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
         admin_gender_male.setText("Male");
         admin_gender_male.setBorder(null);
 
+        txt_last_name.setFont(new java.awt.Font("Century Gothic", 0, 11)); // NOI18N
         txt_last_name.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_last_nameActionPerformed(evt);
@@ -2110,6 +2127,7 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
         jLabel27.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         jLabel27.setText("Last Name");
 
+        txt_email_address.setFont(new java.awt.Font("Century Gothic", 0, 11)); // NOI18N
         txt_email_address.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_email_addressActionPerformed(evt);
@@ -2118,6 +2136,12 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
 
         jLabel23.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         jLabel23.setText("Username");
+
+        txt_first_name.setFont(new java.awt.Font("Century Gothic", 0, 11)); // NOI18N
+
+        txt_username.setFont(new java.awt.Font("Century Gothic", 0, 11)); // NOI18N
+
+        txt_mobile.setFont(new java.awt.Font("Century Gothic", 0, 11)); // NOI18N
 
         buttonGroup1.add(admin_gender_female);
         admin_gender_female.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
@@ -2152,13 +2176,13 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
                     .addComponent(jLabel23))
                 .addGroup(Admin_Autofill_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(Admin_Autofill_PanelLayout.createSequentialGroup()
-                        .addGap(84, 84, 84)
+                        .addGap(8, 8, 8)
+                        .addComponent(txt_username, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(Admin_Autofill_PanelLayout.createSequentialGroup()
+                        .addGap(45, 45, 45)
                         .addGroup(Admin_Autofill_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(admin_gender_male)
-                            .addComponent(admin_gender_female)))
-                    .addGroup(Admin_Autofill_PanelLayout.createSequentialGroup()
-                        .addGap(8, 8, 8)
-                        .addComponent(txt_username, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(admin_gender_female))))
                 .addContainerGap(28, Short.MAX_VALUE))
         );
         Admin_Autofill_PanelLayout.setVerticalGroup(
@@ -2177,25 +2201,26 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(Admin_Autofill_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(Admin_Autofill_PanelLayout.createSequentialGroup()
-                        .addGroup(Admin_Autofill_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(Admin_Autofill_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel25)
-                            .addComponent(admin_gender_male))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(admin_gender_female))
-                    .addGroup(Admin_Autofill_PanelLayout.createSequentialGroup()
-                        .addComponent(txt_first_name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(Admin_Autofill_PanelLayout.createSequentialGroup()
+                                .addComponent(txt_first_name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel27)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txt_last_name, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel27)
+                        .addComponent(jLabel30)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txt_last_name, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel30)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txt_email_address, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel29)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txt_mobile, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txt_email_address, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel29)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txt_mobile, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(Admin_Autofill_PanelLayout.createSequentialGroup()
+                        .addComponent(admin_gender_male)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(admin_gender_female)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -2484,7 +2509,6 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
         jLabel37.setText("Total Registered Students     ||");
 
         jLabel43.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/totRegClipboard.png"))); // NOI18N
-        jLabel43.setPreferredSize(new java.awt.Dimension(64, 64));
 
         jLabel46.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         jLabel46.setForeground(new java.awt.Color(255, 255, 255));
@@ -2520,7 +2544,7 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
             .addComponent(jLabel37, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel12Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel43, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel43)
                 .addGap(65, 65, 65)
                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel12Layout.createSequentialGroup()
@@ -2543,7 +2567,7 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
                 .addComponent(jLabel37, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel43, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel43)
                     .addGroup(jPanel12Layout.createSequentialGroup()
                         .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel46)
@@ -2588,7 +2612,7 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
 
         jLabel58.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         jLabel58.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel58.setText("No Pay");
+        jLabel58.setText("Min Pay");
 
         zero_fee.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         zero_fee.setForeground(new java.awt.Color(255, 255, 255));
@@ -2604,18 +2628,19 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel44)
                 .addGap(65, 65, 65)
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel58, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel54, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel55, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel13Layout.createSequentialGroup()
-                        .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel54, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel55, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cleared_fee, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
                             .addComponent(pending_fee, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel13Layout.createSequentialGroup()
-                        .addComponent(jLabel58)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(5, 5, 5)
                         .addComponent(zero_fee, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -2847,10 +2872,10 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jButton5.setText("View All");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        viewAll.setText("View All");
+        viewAll.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                viewAllActionPerformed(evt);
             }
         });
 
@@ -2866,7 +2891,7 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
                     .addGroup(jPanel10Layout.createSequentialGroup()
                         .addComponent(jButton6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(viewAll, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())
                     .addGroup(jPanel10Layout.createSequentialGroup()
                         .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -2879,7 +2904,7 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addContainerGap(104, Short.MAX_VALUE)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton5)
+                    .addComponent(viewAll)
                     .addComponent(jButton6))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -3021,7 +3046,7 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
                 .addComponent(Menu_Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Main_Dynamic_Panel, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(Main_Dynamic_Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(searchStudent_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
@@ -3029,7 +3054,7 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(searchStudent_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(Main_Dynamic_Panel, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addComponent(Main_Dynamic_Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE))
             .addComponent(Menu_Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 627, Short.MAX_VALUE)
         );
 
@@ -3098,10 +3123,12 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
                
                 String add7 =rs.getString("school");
                 school.setSelectedItem(add7);
-
-//                String add8 =rs.getString("gender");
-//                buttonGroup1.isSelected(add8);
-              
+                
+                if (rs.getString("gender").equals("male")) {
+                    gender_male.setSelected(true);
+                    } else { 
+                     gender_female.setSelected(true);
+                    }
                 }
         
         }catch(Exception e){
@@ -3112,10 +3139,12 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
     private void form_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_form_saveActionPerformed
         // TODO add your handling code here:
         try{
-            try{
             String sql ="insert into student_info (student_id, student_regno, first_name, last_name,  surname, date_of_input, school,  gender, image) values (?,?,?,?,?,?,?,?,?)";
             
             pst=conn.prepareStatement(sql);
+            if (school.getSelectedIndex() == 0) {
+                JOptionPane.showMessageDialog(null, "Error: No School Selected");
+                } else {
             pst.setString(1, studentid.getText());
             pst.setString(2, student_regno.getText());
             pst.setString(3, student_firstname.getText());
@@ -3126,10 +3155,28 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
            
             String value=school.getSelectedItem().toString();
             pst.setString(7, value);
+               
             pst.setString(8, gender);
             pst.setBytes(9, person_image);
             
+            try{
+            String sqlFee ="insert into feebal (student_id, student_regno, feedue, feepaid) values (?,?,?,?)";
+            
+            double x = 0;
+            double y = 13000;
+            pst1=conn.prepareStatement(sqlFee);
+            pst1.setString(1, studentid.getText());
+            pst1.setString(2, student_regno.getText());
+            pst1.setDouble(3, y);
+            pst1.setDouble(4, x);
+            
+            }catch(Exception e){
+                JOptionPane.showMessageDialog(null, e);
+                }
+        
+                }
             pst.execute();
+            pst1.execute();
             
             //Confirmation to save student dialog box
             
@@ -3145,29 +3192,6 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
             
             JOptionPane.showMessageDialog(null, "Saved");
             }catch(Exception e){}
-            
-            
-            try{
-            String sql ="insert into feebal (student_id, student_regno, feedue, feepaid) values (?,?,?,?)";
-            
-            double x = 0;
-            double y = 13000;
-            pst1=conn.prepareStatement(sql);
-            pst1.setString(1, studentid.getText());
-            pst1.setString(2, student_regno.getText());
-            pst1.setDouble(3, y);
-            pst1.setDouble(4, x);
-            
-            pst1.execute();
-            
-            }catch(Exception e){
-                JOptionPane.showMessageDialog(null, e);
-                }
-        
-        
-            }catch(Exception e){
-                JOptionPane.showMessageDialog(null, e);
-                }
         Update_table();
         
     }//GEN-LAST:event_form_saveActionPerformed
@@ -3179,24 +3203,25 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
         if(p==0){
         
         String sql="delete from student_info where student_id =?";
+        String sqlFee="delete from feebal where student_id =?";
         try{
         
             pst=conn.prepareStatement(sql);
+            pst1=conn.prepareStatement(sqlFee);
             
             pst.setString(1, studentid.getText());
+            pst1.setString(1, studentid.getText());
             
             pst.execute();
+            pst1.execute();
             JOptionPane.showMessageDialog(null, "Deleted");
         
             }catch(Exception e){
-            
                 JOptionPane.showMessageDialog(null, e);
-                
                 }
         Update_table();
         
         }
-        
     }//GEN-LAST:event_table_deleteActionPerformed
 
     private void table_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_table_updateActionPerformed
@@ -3204,6 +3229,9 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
         
         try{
         
+            if (school.getSelectedIndex() == 0) {
+                JOptionPane.showMessageDialog(null, "Error: No School Selected");
+                } else {
                 String value1= studentid.getText();
                 String value2= student_regno.getText();
                 String value3= student_firstname.getText();
@@ -3212,20 +3240,28 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
                 String value6= (((JTextField)date_of_input.getDateEditor().getUiComponent()).getText());
                 
                 String value7= school.getSelectedItem().toString();
-                //String value8= gender.getText() ;
-                //byte[]imagedata value9= image_area.getBytes("image");
-            
         
                 String sql="update student_info set student_id='"+value1+"' , student_regno='"+value2+"' , first_name='"+value3+"' , last_name='"+value4+"' ,  surname='"+value5+"' , date_of_input='"+value6+"' , school='"+value7+"' where student_id='"+value1+"'";
                 pst=conn.prepareStatement(sql);
                 
-                pst.execute();
+                
+//                try{
+//                    String value1Fee= studentid.getText();
+//                    String value2Fee= student_regno.getText();
+
+                    String sqlFee="update feebal set student_id='"+value1+"' , student_regno='"+value2+"' where student_id='"+value1+"'";
+                    pst1=conn.prepareStatement(sqlFee);
+//                    }catch(Exception e){
+//                        JOptionPane.showMessageDialog(null, e);
+//                        }
+                
                 JOptionPane.showMessageDialog(null, "Data Updated Succesfully");
+                }
+                pst.execute();
+                pst1.execute();
                 
             }catch(Exception e){
-            
                 JOptionPane.showMessageDialog(null, e);
-                
                 }
         Update_table();
         
@@ -3281,9 +3317,12 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
                
                 String add7 =rs.getString("school");
                 school.setSelectedItem(add7);
-
-//                String add8 =rs.getString("gender");
-//                gender.setText(add8);
+                
+                 if (rs.getString("gender").equals("male")) {
+                    gender_male.setSelected(true);
+                    } else { 
+                     gender_female.setSelected(true);
+                    }
                 
                 byte[]imagedata =rs.getBytes("image");
                 ImageIcon format =new ImageIcon(ScaleImage(imagedata, image_area.getWidth(), image_area.getHeight()));
@@ -3329,9 +3368,12 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
                
                 String add7 =rs.getString("school");
                 school.setSelectedItem(add7);
-
-//                String add8 =rs.getString("gender");
-//                gender.setText(add8);
+                
+                 if (rs.getString("gender").equals("male")) {
+                    gender_male.setSelected(true);
+                    } else { 
+                     gender_female.setSelected(true);
+                    }
                 
                 byte[]imagedata =rs.getBytes("image");
                 ImageIcon format =new ImageIcon(ScaleImage(imagedata, image_area.getWidth(), image_area.getHeight()));
@@ -3377,9 +3419,12 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
                
                 String add7 =rs.getString("school");
                 school.setSelectedItem(add7);
-
-//                String add8 =rs.getString("gender");
-//                gender.setText(add8);
+                
+                 if (rs.getString("gender").equals("male")) {
+                    gender_male.setSelected(true);
+                    } else { 
+                     gender_female.setSelected(true);
+                    }
                 
                 byte[]imagedata =rs.getBytes("image");
                 ImageIcon format =new ImageIcon(ScaleImage(imagedata, image_area.getWidth(), image_area.getHeight()));
@@ -3425,9 +3470,12 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
                
                 String add7 =rs.getString("account_type");
                 account_privallage.setSelectedItem(add7);
-
-//                String add8 =rs.getString("gender");
-//                gender.setText(add8);
+                
+                 if (rs.getString("gender").equals("male")) {
+                    admin_gender_male.setSelected(true);
+                    } else { 
+                     admin_gender_female.setSelected(true);
+                    }
 
                 if(rs.getString("account_type").matches("block")){
                     Admin_block_Warning.setText("ACCOUNT BLOCKED");
@@ -3521,7 +3569,7 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
         String val2=max_fee_payable.getText();
         
         try{
-            String sql = "select student_id as 'Student Id', feepaid as 'Fee Paid' from feebal where feepaid between '"+val1+"' and '"+val2+"'";
+            String sql = "select student_regno as 'Registration No', feepaid as 'Fee Paid' from feebal where feepaid between '"+val1+"' and '"+val2+"'";
             pst=conn.prepareStatement(sql);
             rs=pst.executeQuery();
             exam_eligible_table.setModel(DbUtils.resultSetToTableModel(rs));
@@ -3588,15 +3636,17 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
                
                 String add7 =rs.getString("school");
                 school.setSelectedItem(add7);
-
-//                String add8 =rs.getString("gender");
-//                gender.setText(add8);
+                
+                if (rs.getString("gender").equals("male")) {
+                    gender_male.setSelected(true);
+                    } else { 
+                     gender_female.setSelected(true);
+                    }
                 
                 byte[]imagedata =rs.getBytes("image");
                 ImageIcon format =new ImageIcon(ScaleImage(imagedata, image_area.getWidth(), image_area.getHeight()));
                 image_area.setIcon(format);
                 }
-        
         }catch(Exception e){
         JOptionPane.showMessageDialog(null, e);
         }
@@ -3919,6 +3969,12 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
         
         //student_search.setEnabled(true);
         student_search.setEditable(true);
+        
+        admin_gender_female.setEnabled(false);
+        admin_gender_female.setForeground(Color.black);
+        
+        admin_gender_male.setEnabled(false);
+        admin_gender_male.setForeground(Color.black);
     }//GEN-LAST:event_menu_panel_btn4MousePressed
 
     private void menu_panel_btn2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu_panel_btn2MousePressed
@@ -4131,7 +4187,7 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void viewAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewAllActionPerformed
         // Total Reg Student Fill Start
          try{
              
@@ -4172,16 +4228,16 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
          try{
             
             String sql="select * from feebal";
-            String sql1="select count(*) from feebal where 'feepaid == (2/3)*feedue'";
-            //String sql2="select count(feepaid) from feebal where gender = 'female'";
+            String sql1="select * from feebal";
+            String sql2="select * from feebal";
             
             pst=conn.prepareStatement(sql);
             pst1=conn.prepareStatement(sql1);
-            //pst2=conn.prepareStatement(sql2);
+            pst2=conn.prepareStatement(sql2);
             
             rs=pst.executeQuery(sql);
             rs1=pst1.executeQuery(sql1);
-            //rs2=pst2.executeQuery(sql2);
+            rs2=pst2.executeQuery(sql2);
             
             int x = 0;
             while(rs.next()){
@@ -4194,15 +4250,31 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
             cleared_fee.setText(Integer.toString(x));
             
             
-            if(rs1.next() && rs2.next()){
-               
-                int p =  rs1.getInt("count(*)");
-                pending_fee.setText(Integer.toString(p));
+            int y = 0;
+            while(rs1.next()){
+                double pend = rs1.getDouble("feepaid");
+                double due = rs1.getDouble("feedue");
                 
-//                int n = rs2.getInt("count(gender)");
-//                zero_fee.setText(Integer.toString(n));
-                
+                double min = due/4;
+                if (pend >= min && pend < due){
+                    y++;
                 }
+            }
+            pending_fee.setText(Integer.toString(y));
+            
+            
+            int z = 0;
+            while(rs2.next()){
+                double zero = rs2.getDouble("feepaid");
+                double due = rs2.getDouble("feedue");
+                
+                double min = due/4;
+                if (zero < min){
+                    z++;
+                }
+            }
+            zero_fee.setText(Integer.toString(z));
+            
         
         }catch(Exception e){
         JOptionPane.showMessageDialog(null, e);
@@ -4245,7 +4317,7 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, e);
         }
          //Total System Staff Fill End
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_viewAllActionPerformed
 
     private void admin_list_refreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_admin_list_refreshActionPerformed
         // TODO add your handling code here:
@@ -4283,20 +4355,21 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
                
                 if(rs.getString("account_type").matches("block")){
                     Admin_block_Warning.setText("ACCOUNT BLOCKED");
+                    account_privallage.setSelectedIndex(0);
                     }
                     else if(rs.getString("account_type").isEmpty() || rs.wasNull()){
                     Admin_privilage_Warning.setText("USER PRIVILLAGE NOT SET");
+                    account_privallage.setSelectedIndex(0);
                     }
                     else{String add7 =rs.getString("account_type");
                 account_privallage.setSelectedItem(add7);
                     }
 
-//                if(rs.getString("gender").matches("male")){
-//                 buttonGroup1.setSelected((ButtonModel) admin_gender_male, true);
-//                }
-//                else if(rs.getString("gender").matches("female")){
-//                 buttonGroup1.setSelected((ButtonModel) admin_gender_female, true);
-//                }
+                if (rs.getString("gender").equals("male")) {
+                    admin_gender_male.setSelected(true);
+                    } else { 
+                     admin_gender_female.setSelected(true);
+                    }
             }
         
         }catch(Exception e){
@@ -4338,16 +4411,21 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
                
                  if(rs.getString("account_type").matches("block")){
                     Admin_block_Warning.setText("ACCOUNT BLOCKED");
+                    account_privallage.setSelectedIndex(0);
                     }
                     else if(rs.getString("account_type").isEmpty()){
                     Admin_privilage_Warning.setText("USER PRIVILLAGE NOT SET");
+                    account_privallage.setSelectedIndex(0);
                     }
                     else{String add7 =rs.getString("account_type");
-                account_privallage.setSelectedItem(add7);
+                    account_privallage.setSelectedItem(add7);
                     }
-
-//                String add8 =rs.getString("gender");
-//                buttonGroup1.setSelected(add8, rootPaneCheckingEnabled);
+                 
+                 if (rs.getString("gender").equals("male")) {
+                    admin_gender_male.setSelected(true);
+                    } else { 
+                     admin_gender_female.setSelected(true);
+                    }
                 }
         
         }catch(Exception e){
@@ -4488,10 +4566,22 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
     }//GEN-LAST:event_admin_gender_femaleActionPerformed
 
     private void Account_DisplayPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Account_DisplayPanelMousePressed
-        // TODO add your handling code here:
-        Change_Password c =new Change_Password();
-                        c.setVisible(true);
-                        
+        //Functions To set anchor label of account user type
+            String userAccount = account_label.getText();
+            String userName = user_label.getText();
+            
+            
+            Change_Password c =new Change_Password();
+                            c.setVisible(true);
+
+        try{
+            Change_Password.account_label_ChangeP.setText(userAccount);
+            Change_Password.user_label_ChangeP.setText(userName);
+            }catch(Exception e){
+                JOptionPane.showMessageDialog(null, e);
+               }
+        //Functions To set anchor label of account user type end
+        
         //FunctionControl.AnchorLabel();
     }//GEN-LAST:event_Account_DisplayPanelMousePressed
 
@@ -4522,6 +4612,11 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
         Admin_block_Warning.setText("");
         Admin_privilage_Warning.setText("");
     }//GEN-LAST:event_student_searchKeyPressed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        Update_table();
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -4811,6 +4906,7 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
     private javax.swing.JLabel uoe_header_logo;
     private javax.swing.JLabel uoe_students_pic;
     public static javax.swing.JLabel user_label;
+    private javax.swing.JButton viewAll;
     private javax.swing.JLabel zero_fee;
     // End of variables declaration//GEN-END:variables
 

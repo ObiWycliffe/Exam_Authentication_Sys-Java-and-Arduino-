@@ -43,18 +43,15 @@ public class FunctionControl {
     
      public static void Next_Number(){
     try{
-            String sql="select max(student_id) as last_id from student_info";
+            String sql="select max(student_id) as Next from student_info";
             //String sql="select student_id.NEXTVAL from student_info";
             pst=conn.prepareStatement(sql);
             rs=pst.executeQuery();
             
-            if(rs.next()){
+            //int n = 0;
+            while(rs.next()){
                 Integer n = rs.getInt("max(student_id)");
-                Main_Activity_Frame.studentid.setText(Integer.toString(n));
-//                String n = rs.getString("last_id");
-//                Integer N = Integer.parseInt(n); 
-//                Integer New = N+1;
-                //studentid.setText(n.toString());
+                Main_Activity_Frame.studentid.setText(n.toString());
             }
         }catch(Exception e){}
         }
