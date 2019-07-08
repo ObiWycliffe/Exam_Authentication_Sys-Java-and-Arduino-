@@ -1135,6 +1135,9 @@
                                   <TableHeader reorderingAllowed="false" resizingAllowed="true"/>
                                 </Property>
                               </Properties>
+                              <Events>
+                                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="fee_balance_tableMouseClicked"/>
+                              </Events>
                             </Component>
                           </SubComponents>
                         </Container>

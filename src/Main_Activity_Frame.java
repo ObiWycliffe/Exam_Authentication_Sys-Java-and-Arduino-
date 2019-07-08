@@ -1034,6 +1034,11 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
         fee_balance_table.setSelectionBackground(new java.awt.Color(153, 102, 0));
         fee_balance_table.setShowHorizontalLines(false);
         fee_balance_table.getTableHeader().setReorderingAllowed(false);
+        fee_balance_table.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                fee_balance_tableMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(fee_balance_table);
 
         fee_balance_panel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Press View to Check Selected Students' Fee Balance", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 10), new java.awt.Color(0, 153, 153))); // NOI18N
@@ -1455,7 +1460,7 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
             studentTables_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(studentTables_panelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(database_tables, javax.swing.GroupLayout.DEFAULT_SIZE, 396, Short.MAX_VALUE)
+                .addComponent(database_tables, javax.swing.GroupLayout.PREFERRED_SIZE, 396, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1894,7 +1899,7 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
                         .addComponent(studentTables_panel, javax.swing.GroupLayout.PREFERRED_SIZE, 637, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())
                     .addComponent(IsoCertified_Label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-            .addComponent(Header_Panel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1148, Short.MAX_VALUE)
+            .addComponent(Header_Panel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1182, Short.MAX_VALUE)
         );
         All_Student_Edit_PanelLayout.setVerticalGroup(
             All_Student_Edit_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2503,14 +2508,14 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
             Graphical_Edit_StatisticsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Graphical_Edit_StatisticsLayout.createSequentialGroup()
                 .addComponent(Statistics_Header, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
                 .addComponent(Chart_ContentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(IsoCertified_Label1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0))
             .addGroup(Graphical_Edit_StatisticsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Graphical_Edit_StatisticsLayout.createSequentialGroup()
-                    .addGap(0, 96, Short.MAX_VALUE)
+                    .addGap(0, 86, Short.MAX_VALUE)
                     .addComponent(Statistics_Buttons_Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
@@ -3065,7 +3070,7 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
                 .addComponent(Menu_Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Main_Dynamic_Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(Main_Dynamic_Panel, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(searchStudent_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
@@ -3073,7 +3078,7 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(searchStudent_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(Main_Dynamic_Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE))
+                .addComponent(Main_Dynamic_Panel, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
             .addComponent(Menu_Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 627, Short.MAX_VALUE)
         );
 
@@ -3093,7 +3098,7 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
         
         int row =student_info_table.getSelectedRow();
             String Table_click=(student_info_table.getModel().getValueAt(row, 0).toString());
-        
+            id = Table_click;
         try{
         
             String sql="select image from student_info where student_regno ='"+Table_click+"'";
@@ -3121,7 +3126,6 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
             pst=conn.prepareStatement(sql);
             rs=pst.executeQuery();
             if(rs.next()){
-                
                 String add1 =rs.getString("student_id");
                 studentid.setText(add1);
                 
@@ -3233,8 +3237,8 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
             pst=conn.prepareStatement(sql);
             pst1=conn.prepareStatement(sqlFee);
             
-            pst.setString(1, studentid.getText());
-            pst1.setString(1, studentid.getText());
+            pst.setString(1, id);
+            pst1.setString(1, id);
             
             pst.execute();
             pst1.execute();
@@ -3565,7 +3569,7 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
         try{
             
             String sql ="select feedue, feepaid from feebal where student_id='"+Table_click+"'";
-
+            
             pst=conn.prepareStatement(sql);
             rs=pst.executeQuery();
             if(rs.next()){
@@ -4898,6 +4902,25 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
                 }
     }//GEN-LAST:event_jButton7ActionPerformed
 
+    private void fee_balance_tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fee_balance_tableMouseClicked
+        // TODO add your handling code here:
+        int row =fee_balance_table.getSelectedRow();
+            String Table_click=(fee_balance_table.getModel().getValueAt(row, 0).toString());
+            id = Table_click;
+//       
+//        try{
+//            
+//            String sql="select * from feebal where student_regno='"+Table_click+"'";
+//            pst=conn.prepareStatement(sql);
+//            rs=pst.executeQuery();
+//            if(rs.next()){
+//                id = rs.getString("student_id");
+//                String add1 =rs.getString("student_id");
+//                studentid.setText(add1);
+//            }
+//            }catch(Exception e){}
+    }//GEN-LAST:event_fee_balance_tableMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -5198,5 +5221,6 @@ public class Main_Activity_Frame extends javax.swing.JFrame {
     byte[] person_image = null;
     private String gender;
     String attachment_path;
+    String id ="";
 
 }
