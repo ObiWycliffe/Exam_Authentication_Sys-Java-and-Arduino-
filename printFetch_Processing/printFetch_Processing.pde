@@ -7,10 +7,10 @@ final boolean debugPort = true;
 Serial myPort;
 
 MySQL db;
-String user = "root", pass = "root", database = "authenticationsys";
-String f_id = "", name = "", adm = "", schl = "";
+String user = "root", pass = "root", database = "authenticationsys"; //exam
+String f_id = "", name = "", adm = "", schl = "", stat = "";
 String data = "";
-int bal = 0;
+int bal = 0, paid = 0, due= 0;
 String code = "";
 String COMx = "COM3";
 
@@ -18,7 +18,7 @@ void setup(){
   size(700,500);
   
   
-  /*
+  
   try{
     if(debugPort) printArray(Serial.list());
     int numPorts = Serial.list().length;
@@ -43,10 +43,10 @@ void setup(){
     println("Error:", e);
     exit();
    }
-   */
+   
    db = new MySQL( this, "localhost", database, user, pass );
    
-   search("2");
+   //search("2");
 }
 
 void draw(){
@@ -80,16 +80,23 @@ void search(String s){
             println("read");
             db.query( "SELECT * FROM feebal WHERE student_id = '"+s+"';");
             if (db.next() == true){
-              bal =db.getInt("feedue")- db.getInt("feepaid");
+              paid =db.getInt("feepaid");
+              due = db.getInt("feedue");
             } else {
               println("no records found");
             }
-            data = name +","+adm+","+schl+","+bal;
-            //myPort.write(data);
-            //myPort.write('\n');
+            if (paid < (due*0.75)){
+              stat = "Exm:Unauthorized";
+            } else {
+              stat = "Exm: Authorized";
+            }
+            adm = "-> "+adm;
+            data = adm+","+stat;
+            myPort.write(data);
+            myPort.write('\n');
         } else {
           println("no records found");
-          myPort.write("no data, vnbv");
+          myPort.write("Error, no data found");
           myPort.write('\n');
         }
     } else {
