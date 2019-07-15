@@ -1,16 +1,14 @@
-#include <LiquidCrystal.h>
-
  
 #include <Adafruit_Fingerprint.h>
 #include <LiquidCrystal_I2C.h>
 
-LiquidCrystal_I2C lcd(0x3F,16,2);
+LiquidCrystal_I2C lcd(0x3F,16,2); //slave adress character = 16,2
 SoftwareSerial mySerial(2, 3);
 
-Adafruit_Fingerprint finger = Adafruit_Fingerprint(&Serial2);
+Adafruit_Fingerprint finger = Adafruit_Fingerprint(&mySerial);
 
 uint16_t id;
-const int buttonPin = 38; 
+const int buttonPin = A1;
 const int ledPin = 13;
 
 bool state = true, state2 = true; 
@@ -20,7 +18,7 @@ int z = 5;
 int lastButtonState = LOW;
 unsigned long lastDebounceTime = 0;  
 unsigned long debounceDelay = 50;  
-String data = "", nm = "", bal = "";
+String data = "", nm = "", bal = "", stat = "", adm = "";
 
 void setup()  
 {
@@ -68,13 +66,15 @@ void loop()                     // run over and over again
   if (state2){
     getFingerprintIDez();
     if (match){
-      readSerial();
+      readSerial(); 
+      
       lcd.clear();
-      lcd.setCursor(0,0);
-      lcd.print("Database");
-      if (nm != ""){
+      if (adm != ""){
+        
+        lcd.setCursor(0,0);
+        lcd.print(adm);
         lcd.setCursor(0,1);
-        lcd.print(nm);
+        lcd.print(stat);
       } else {
         lcd.setCursor(0,1);
         lcd.print("Not found");
@@ -143,7 +143,7 @@ uint8_t getFingerprintEnroll() {
       break;
     }
     debounce();
-    if(state){
+    if(state2){
       break;
     }
   }
@@ -153,7 +153,7 @@ uint8_t getFingerprintEnroll() {
   lcd.setCursor(0,1);
   p = finger.image2Tz(1);
   switch (p) {
-    if(state){
+    if(state2){
       break;
     }
     case FINGERPRINT_OK:
@@ -182,7 +182,7 @@ uint8_t getFingerprintEnroll() {
   p = 0;
   while (p != FINGERPRINT_NOFINGER) {
     p = finger.getImage();
-    if(state){
+    if(state2){
       break;
     }
   }
@@ -192,7 +192,7 @@ uint8_t getFingerprintEnroll() {
   lcd.print("Place again");
   lcd.setCursor(0,1);
   while (p != FINGERPRINT_OK) {
-    if(state){
+    if(state2){
       break;
     }
     p = finger.getImage();
@@ -264,7 +264,7 @@ uint8_t getFingerprintEnroll() {
   lcd.clear();
   lcd.setCursor(0,0);
   lcd.print("ID " + String(id));
-  if(!state){
+  if(!state2){
       p = finger.storeModel(id);  //store model only if in enroll mode
   }
   
@@ -298,19 +298,32 @@ int getFingerprintIDez() {
   if (p != FINGERPRINT_OK)  return -1;
 
   p = finger.fingerFastSearch();
-  if (p != FINGERPRINT_OK)  return -1;
-  
-  // found a match!
-  lcd.clear();
+  if (p == FINGERPRINT_OK) {
+    Serial.println("Found a print match!");
+  } else if (p == FINGERPRINT_PACKETRECIEVEERR) {
+    Serial.println("Communication error");
+    return p;
+  } else if (p == FINGERPRINT_NOTFOUND) {
+    Serial.println("Did not find a match");
+    lcd.clear();
   lcd.setCursor(0,0);
+  lcd.print("Not registered");
+  delay(1000);
+    return p;
+  } else {
+    Serial.println("Unknown error");
+    return p;
+  }
+  // found a match!
+  
   
   unsigned int n = finger.fingerID;
-  lcd.print("Found ID #" + String(n));
+  //lcd.print("Found ID #" + String(n));
   Serial.println(n);
   match = true;
   lcd.setCursor(0,1);
   unsigned int c = finger.confidence;
-  lcd.print(" confid  " + String(c));
+  //lcd.print(" confid  " + String(c));
   delay(200);
   return finger.fingerID; 
 }
@@ -328,11 +341,11 @@ void debounce(){
       buttonState = reading;
 
       if (buttonState == HIGH) {
-        state = !state;
+        state2 = !state2;
       }
     }
   }
-  digitalWrite(ledPin, state);
+  digitalWrite(ledPin, state2);
 
   // save the reading. Next time through the loop, it'll be the lastButtonState:
   lastButtonState = reading;
@@ -362,8 +375,8 @@ void stringSplit(String s, char a){
       }
     }
 
-    nm = split[0];
-    bal = split[3];
+    adm = split[0];
+    stat = split[1];
     
   } else {
     
