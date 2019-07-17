@@ -96,7 +96,7 @@ void search(String s){
             myPort.write('\n');
         } else {
           println("no records found");
-          myPort.write("Error, no data found");
+          myPort.write(", no data found");
           myPort.write('\n');
         }
     } else {

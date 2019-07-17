@@ -42,6 +42,9 @@ void setup()
   lcd.print("No " + String(finger.templateCount));
   pinMode(buttonPin, INPUT);
   pinMode(ledPin, OUTPUT);
+  pinMode(4, OUTPUT);
+  pinMode(5, OUTPUT);
+  pinMode(6, OUTPUT);
   digitalWrite(ledPin, state);
 }
 
@@ -75,12 +78,18 @@ void loop()                     // run over and over again
         lcd.print(adm);
         lcd.setCursor(0,1);
         lcd.print(stat);
+        digitalWrite(4, HIGH);
       } else {
+        lcd.setCursor(0,0);
+        lcd.print(" Error");
         lcd.setCursor(0,1);
-        lcd.print("Not found");
+        lcd.print("  no data found");
+        digitalWrite(5, HIGH);
       }
       
-      delay(5000);
+      delay(3000);
+      digitalWrite(4, LOW);
+      digitalWrite(5, LOW);
       match = false;
     }
 //    lcd.clear();
@@ -308,7 +317,9 @@ int getFingerprintIDez() {
     lcd.clear();
   lcd.setCursor(0,0);
   lcd.print("Not registered");
-  delay(1000);
+  digitalWrite(6, HIGH);
+  delay(3000);
+  digitalWrite(6, LOW);
     return p;
   } else {
     Serial.println("Unknown error");
